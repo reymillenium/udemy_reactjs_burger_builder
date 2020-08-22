@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 // import './App.css';
 import Layout from './components/Layout/Layout';
+import Auxiliary from './hoc/Auxiliary';
 
 
 class App extends Component {
 
     render() {
         return (
-            // <div>
-            <Layout>c
-
-            </Layout>
-            // </div>
+            <Auxiliary>
+                <div>
+                    <Layout>
+                        <p>This is just a test. Here inside the payout, goes the page as a children</p>
+                    </Layout>
+                </div>
+            </Auxiliary>
         );
     }
 }
