@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 // import './App.css';
-import Layout from './components/Layout/Layout';
 import Auxiliary from './hoc/Auxiliary';
+import Layout from './components/Layout/Layout';
+import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 
 
 class App extends Component {
@@ -9,11 +10,9 @@ class App extends Component {
     render() {
         return (
             <Auxiliary>
-                <div>
-                    <Layout>
-                        <p>This is just a test. Here inside the payout, goes the page as a children</p>
-                    </Layout>
-                </div>
+                <Layout>
+                    <BurgerBuilder/>
+                </Layout>
             </Auxiliary>
         );
     }
