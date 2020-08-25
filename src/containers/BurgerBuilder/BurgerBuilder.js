@@ -59,7 +59,6 @@ class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
         updatedIngredients[type] = updateCount;
-        // this.state.ingredients[type] -= 1;
 
         const priceReduction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
@@ -72,13 +71,27 @@ class BurgerBuilder extends Component {
     }
 
     render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        }
+        for (let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0
+        }
+
+        // for (var key in disabledInfo) {
+        //     // check if the property/key is defined in the object itself, not in parent
+        //     if (disabledInfo.hasOwnProperty(key)) {
+        //         console.log(key, disabledInfo[key]);
+        //     }
+        // }
+
         return (
             <Auxiliary>
                 <Burger ingredients={this.state.ingredients}/>
-                {/*<div>BurgerBuilder: Build controls. Area to add and remove ingredients</div>*/}
                 <BuildControls
                     ingredientAdded={this.addIngredientHandle}
                     ingredientRemoved={this.removeIngredientHandle}
+                    disabledInfo={disabledInfo}
                 />
             </Auxiliary>
         );
