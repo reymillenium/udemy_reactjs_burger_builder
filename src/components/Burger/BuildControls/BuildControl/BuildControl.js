@@ -14,6 +14,7 @@ const buildControl = (props) => (
             className={classes.More}
             onClick={props.added}>More
         </button>
+        <div className={classes.Label}>x {parseFloat(props.ingredient_price).toFixed(2)} USD</div>
     </div>
 );
 
