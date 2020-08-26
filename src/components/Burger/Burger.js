@@ -15,8 +15,12 @@ const burger = (props) => {
     //     return arr.concat(el)
     // }, []);
     let ingredients_array = ingredients_array_of_arrays.flat(1);
+    // console.log(ingredients_array_of_arrays);
     // console.log(ingredients_array);
-    if (ingredients_array.length == 0) {
+    // console.log(Object.values(props.ingredients));
+    // console.log(Object.values(props.ingredients).some(el => el > 0));
+
+    if (ingredients_array.length === 0) {
         ingredients_array = <p style={{color: "red"}}>Please start adding ingredients</p>;
     }
 
