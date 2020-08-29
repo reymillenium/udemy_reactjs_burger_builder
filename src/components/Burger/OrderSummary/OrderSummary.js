@@ -4,7 +4,7 @@ import Auxiliary from '../../../hoc/Auxiliary';
 const orderSummary = (props) => {
     const ingredientsSummaryList = Object.keys(props.ingredients).map(igKey => {
         return (
-            <li>
+            <li key={igKey}>
                 {/*<li>{igKey.charAt(0).toUpperCase() + igKey.slice(1)}: {props.ingredients[igKey]}</li>*/}
                 <span style={{textTransform: "capitalize"}}>{igKey}</span>: {props.ingredients[igKey]}
             </li>
@@ -18,7 +18,7 @@ const orderSummary = (props) => {
             <ul>
                 {ingredientsSummaryList}
             </ul>
-            <p>Continue to checkout?</p>
+            <p>Continue to Checkout?</p>
         </Auxiliary>
     );
 }
