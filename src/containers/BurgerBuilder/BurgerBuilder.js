@@ -108,9 +108,9 @@ class BurgerBuilder extends Component {
 
         return (
             <Auxiliary>
-                {this.state.purchasing && <Modal>
+                <Modal show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients}/>
-                </Modal>}
+                </Modal>
 
                 <Burger ingredients={this.state.ingredients}/>
 
