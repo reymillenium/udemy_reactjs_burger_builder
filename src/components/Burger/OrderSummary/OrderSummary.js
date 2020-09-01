@@ -22,8 +22,8 @@ const orderSummary = (props) => {
             <p>Continue to Checkout?</p>
             {/*<button>CANCEL</button>*/}
             {/*<button>CONTINUE</button>*/}
-            <Button type={'Dancer'}>CANCEL</Button>
-            <Button type={'Success'}>CONTINUE</Button>
+            <Button buttonType={'Dancer'}>CANCEL</Button>
+            <Button buttonType={'Success'}>CONTINUE</Button>
 
 
         </Auxiliary>
