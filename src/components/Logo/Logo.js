@@ -3,7 +3,7 @@ import burgerLogo from './../../../src/assets/images/burger_only_centered_trimme
 import classes from './Logo.module.scss';
 
 const logo = (props) => (
-    <div className={classes.Logo}>
+    <div className={classes.Logo} style={{height: props.height}}>
         <img src={burgerLogo} alt="BurgerBuilder"/>
     </div>
 );
