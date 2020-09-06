@@ -7,7 +7,7 @@ const hamburgerIcon = (props) => (
     //     {props.children}
     // </div>
     // const isActiveClass = props.open
-    <button className={[classes.hamburger, classes.hamburgerBoring, classes.isActive].join(' ')} onClick={props.open_sidedrawer} type="button">
+    <button className={[classes.hamburger, classes.hamburgerBoring, classes.isActive].join(' ')} onClick={props.clicked} type="button">
       <span className={classes.hamburgerBox}>
         <div className={classes.hamburgerInner}></div>
       </span>

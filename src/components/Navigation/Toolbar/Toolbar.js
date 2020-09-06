@@ -3,12 +3,12 @@ import classes from './Toolbar.module.scss';
 import Logo from '../../Logo/Logo';
 import NavigationItems from './../NavigationItems/NavigationItems';
 import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
-import DrawerToggler from "../SideDrawer/DrawerToggler/DrawerToggler";
+import DrawerToggle from "../SideDrawer/DrawerToggler/DrawerToggle";
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
-        <DrawerToggler click={props.open_sidedrawer}>MENU</DrawerToggler>
-        {/*<HamburgerIcon open_sidedrawer={props.open_sidedrawer}>*/}
+        <DrawerToggle clicked={props.drawerToggleClicked}>MENU</DrawerToggle>
+        {/*<HamburgerIcon clicked={props.drawerToggleClicked}>*/}
         {/*<HamburgerIcon>*/}
         {/*    /!*MENU*!/*/}
         {/*</HamburgerIcon>*/}
