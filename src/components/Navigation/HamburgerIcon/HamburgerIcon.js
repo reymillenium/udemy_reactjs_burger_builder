@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import classes from './HamburgerIcon.module.scss';
 
@@ -13,5 +14,9 @@ const hamburgerIcon = (props) => (
       </span>
     </button>
 );
+
+hamburgerIcon.propTypes = {
+    clicked: PropTypes.func.isRequired
+}
 
 export default hamburgerIcon;
