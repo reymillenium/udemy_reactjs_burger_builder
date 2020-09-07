@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './Button.module.scss';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 const button = (props) => (
     <button
@@ -11,5 +12,11 @@ const button = (props) => (
         {props.children}
     </button>
 );
+
+button.propTypes = {
+    clicked: PropTypes.func.isRequired,
+    buttonType: PropTypes.string.isRequired,
+    children: PropTypes.string.isRequired
+}
 
 export default button;
