@@ -4,6 +4,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from './../NavigationItems/NavigationItems';
 import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
 import DrawerToggle from "../SideDrawer/DrawerToggler/DrawerToggle";
+import PropTypes from 'prop-types';
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
@@ -23,5 +24,9 @@ const toolbar = (props) => (
         </nav>
     </header>
 );
+
+toolbar.propTypes = {
+    drawerToggleClicked: PropTypes.func.isRequired
+}
 
 export default toolbar;
