@@ -123,7 +123,7 @@ class BurgerBuilder extends Component {
                         ingredients={this.state.ingredients}
                         purchaseCanceled={this.purchasingCancelHandler}
                         purchaseContinue={this.purchaseContinueHandler}
-                        total_price={this.state.totalPrice}/>
+                        total_price={parseFloat(this.state.totalPrice)}/>
                 </Modal>
 
                 <Burger ingredients={this.state.ingredients}/>
@@ -132,7 +132,7 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandle}
                     ingredientRemoved={this.removeIngredientHandle}
                     disabledInfo={disabledInfo}
-                    price={this.state.totalPrice}
+                    price={parseFloat(this.state.totalPrice)}
                     purchasable={this.state.purchasable}
                     ingredient_prices={INGREDIENT_PRICES}
                     order_click={this.purchasingHandler}
