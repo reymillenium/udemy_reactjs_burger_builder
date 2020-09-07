@@ -3,6 +3,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import BackDrop from '../../UI/Backdrop/Backdrop';
 import Auxiliary from '../../../hoc/Auxiliary';
+import PropTypes from 'prop-types';
 
 import classes from './SideDrawer.module.scss';
 
@@ -27,5 +28,10 @@ const sideDrawer = (props) => {
     );
 
 };
+
+sideDrawer.propTypes = {
+    show: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired
+}
 
 export default sideDrawer;
