@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import classes from './Modal.module.scss';
 
 class Modal extends Component {
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log('[Modal] -> shouldComponentUpdate');
+        return (nextProps.show !== this.props.show);
+    }
+
     componentWillUpdate(nextProps, nextState, nextContext) {
         console.log('[Modal] -> componentWillUpdate');
     }
@@ -36,6 +41,7 @@ class Modal extends Component {
 
 Modal.propTypes = {
     modalClosed: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired
+    show: PropTypes.bool.isRequired,
+    children: PropTypes.object.isRequired
 }
 export default Modal;
