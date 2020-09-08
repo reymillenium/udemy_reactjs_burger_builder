@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import PropTypes from 'prop-types';
 
-import Auxiliary from './../../hoc/Auxiliary';
+import Auxiliary from '../../hoc/Auxiliary';
 import classes from './Layout.module.scss';
 
 class Layout extends Component {
@@ -48,6 +49,10 @@ class Layout extends Component {
         );
     }
 
+}
+
+Layout.propTypes = {
+    children: PropTypes.object
 }
 
 export default Layout;
