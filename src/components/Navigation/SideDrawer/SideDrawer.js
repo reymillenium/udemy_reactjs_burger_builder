@@ -2,7 +2,7 @@ import React from "react";
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import BackDrop from '../../UI/Backdrop/Backdrop';
-import Auxiliary from '../../../hoc/Auxiliary';
+import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import PropTypes from 'prop-types';
 
 import classes from './SideDrawer.module.scss';

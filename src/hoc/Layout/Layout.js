@@ -3,7 +3,7 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import PropTypes from 'prop-types';
 
-import Auxiliary from '../Auxiliary';
+import Auxiliary from '../Auxiliary/Auxiliary';
 import classes from './Layout.module.scss';
 
 class Layout extends Component {
