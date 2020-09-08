@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import './App.css';
 import Auxiliary from './hoc/Auxiliary';
-import Layout from './containers/Layout/Layout';
+import Layout from './hoc/Layout/Layout';
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 
 
