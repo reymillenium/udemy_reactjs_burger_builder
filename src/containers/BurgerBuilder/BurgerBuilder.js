@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger.js';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls.js';
 import Modal from './../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 const INGREDIENT_PRICES = {
     salad: 0.50,
@@ -98,7 +99,29 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        alert('You continue!');
+        // alert('You continue!');
+        // In a real price I would recalculate the price on the server
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: "Reinier Garcia",
+                address: {
+                    street: '101 SW',
+                    zipCode: '33135',
+                    country: 'United States of America'
+                },
+                email: 'reymillenium@gmail.com'
+            },
+            deliveryMethod: 'fastest'
+        }
+
+        axios.post('/orders.json', order)
+            .then(response => {
+                console.log(response);
+            }).catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
