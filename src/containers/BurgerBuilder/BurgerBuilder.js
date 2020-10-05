@@ -24,16 +24,20 @@ class BurgerBuilder extends Component {
 
     // More modern way to define the state on a class based container (stateful component):
     state = {
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
         loading: false
+    }
+
+    componentDidMount() {
+        axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({
+                    ingredients: response.data
+                })
+            });
     }
 
     addIngredientHandle = (type) => {
@@ -153,6 +157,8 @@ class BurgerBuilder extends Component {
         if (this.state.loading) {
             orderSummary = <Spinner/>
         }
+
+
 
         // for (var key in disabledInfo) {
         //     // check if the property/key is defined in the object itself, not in parent
