@@ -8,7 +8,10 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
-        componentDidMount() {
+        // If this method gets deprecated in the future, then we can use the constructor
+        // Using this instead of componentDidMount, allows to show an error before is executed componentDidMount on the children (wrappedComponent = BurgerBuilder in this case)
+        // * ComponentDidMount is called only after ComponentDidMount is called on the children (after rendering the Child Components)
+        componentWillMount() {
             // Clears the error on the request
             axios.interceptors.request.use(request => {
                 this.setState({

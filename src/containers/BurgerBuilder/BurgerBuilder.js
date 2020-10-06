@@ -28,7 +28,8 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
     }
 
     componentDidMount() {
@@ -37,7 +38,13 @@ class BurgerBuilder extends Component {
                 this.setState({
                     ingredients: response.data
                 })
-            });
+            }).catch(error => {
+                // Having a catch method allows to avoid executing the then method when an error is present
+                this.setState({
+                    error: true
+                });
+            }
+        );
     }
 
     addIngredientHandle = (type) => {
@@ -150,8 +157,8 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
+        let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner/>
 
-        let burger = <Spinner/>
         if (this.state.ingredients) {
             burger = (
                 <Auxiliary>
