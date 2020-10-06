@@ -149,15 +149,35 @@ class BurgerBuilder extends Component {
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-        let orderSummary = <OrderSummary
-            ingredients={this.state.ingredients}
-            purchaseCanceled={this.purchasingCancelHandler}
-            purchaseContinue={this.purchaseContinueHandler}
-            total_price={parseFloat(this.state.totalPrice)}/>
+        let orderSummary = null;
+
+        let burger = <Spinner/>
+        if (this.state.ingredients) {
+            burger = (
+                <Auxiliary>
+                    <Burger ingredients={this.state.ingredients}/>
+                    <BuildControls
+                        ingredientAdded={this.addIngredientHandle}
+                        ingredientRemoved={this.removeIngredientHandle}
+                        disabledInfo={disabledInfo}
+                        price={parseFloat(this.state.totalPrice)}
+                        purchasable={this.state.purchasable}
+                        ingredient_prices={INGREDIENT_PRICES}
+                        order_click={this.purchasingHandler}
+                    />
+                </Auxiliary>
+            );
+
+            orderSummary = <OrderSummary
+                ingredients={this.state.ingredients}
+                purchaseCanceled={this.purchasingCancelHandler}
+                purchaseContinue={this.purchaseContinueHandler}
+                total_price={parseFloat(this.state.totalPrice)}/>
+        }
+
         if (this.state.loading) {
             orderSummary = <Spinner/>
         }
-
 
 
         // for (var key in disabledInfo) {
@@ -172,18 +192,7 @@ class BurgerBuilder extends Component {
                 <Modal show={this.state.purchasing} modalClosed={this.purchasingCancelHandler}>
                     {orderSummary}
                 </Modal>
-
-                <Burger ingredients={this.state.ingredients}/>
-
-                <BuildControls
-                    ingredientAdded={this.addIngredientHandle}
-                    ingredientRemoved={this.removeIngredientHandle}
-                    disabledInfo={disabledInfo}
-                    price={parseFloat(this.state.totalPrice)}
-                    purchasable={this.state.purchasable}
-                    ingredient_prices={INGREDIENT_PRICES}
-                    order_click={this.purchasingHandler}
-                />
+                {burger}
             </Auxiliary>
         );
     }
