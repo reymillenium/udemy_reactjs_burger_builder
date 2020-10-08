@@ -9,7 +9,7 @@ const backdrop = (props) => (
 );
 
 backdrop.propTypes = {
-    show: PropTypes.bool.isRequired,
+    // show: PropTypes.bool.isRequired,
     backdrop_click: PropTypes.func.isRequired
 }
 
