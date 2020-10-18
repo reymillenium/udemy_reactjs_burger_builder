@@ -1,10 +1,16 @@
 import React from "react";
+
+// Makes available on the component, the history, match (from the nearest match = BurgerBuilder). location, etc (route properties)
+// Using this is not necessary the pass the route properties from the top level component
+// import {withRouter} from 'react-router-dom';
+
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import PropTypes from 'prop-types';
 
 import classes from './Burger.module.scss';
 
 const burger = (props) => {
+    // console.log('Burger ->', props);
     const ingredients_array_of_arrays = Object.keys(props.ingredients)
         .map(ingredient_key => {
             return [...Array(props.ingredients[ingredient_key])].map((_, i) => {
@@ -38,4 +44,5 @@ burger.propTypes = {
     ingredients: PropTypes.object.isRequired
 };
 
+// export default withRouter(burger);
 export default burger;
