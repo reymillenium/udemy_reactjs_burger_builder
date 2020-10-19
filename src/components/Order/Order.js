@@ -5,10 +5,10 @@ const order = (props) => {
     return (
         <div className={classes.Order}>
             <p>
-                Ingredients: Salad (1)
+                Ingredients: Salad ({props.ingredients.salad}), Bacon ({props.ingredients.bacon}), Cheese ({props.ingredients.cheese}), Meat ({props.ingredients.meat})
             </p>
             <p>
-                Price: <strong>USD 5.45</strong>
+                Price: <strong>{props.price} USD</strong>
             </p>
         </div>
     );
