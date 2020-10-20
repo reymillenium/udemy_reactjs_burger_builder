@@ -14,10 +14,10 @@ const order = (props) => {
     let ingredientsString = ingredientsArray.join(', ');
 
     return (
-        <div className={classes.Order}>
+        <div className={classes.Order} key={props.id}>
             <p>
                 {/*Ingredients: Salad ({props.ingredients.salad}), Bacon ({props.ingredients.bacon}), Cheese ({props.ingredients.cheese}), Meat ({props.ingredients.meat})*/}
-                Ingredients: {ingredientsString}
+                <strong>Ingredients:</strong> {ingredientsString}
             </p>
             <p>
                 Price: <strong>{props.price} USD</strong>
