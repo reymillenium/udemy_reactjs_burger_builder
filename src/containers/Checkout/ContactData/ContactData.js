@@ -109,6 +109,21 @@ class ContactData extends Component {
         // this.props.history.push("/checkout");
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        // This does not creates a deep clone:
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        }
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        this.setState({
+            orderForm: updatedOrderForm
+        });
+    }
+
     render() {
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -118,7 +133,7 @@ class ContactData extends Component {
             });
         }
         let form = (
-            <form action="">
+            <form>
                 {/*<input className={classes.Input} type="text" name={'name'} placeholder={'Your Name'}/>*/}
                 {/*<input className={classes.Input} type="email" name={'email'} placeholder={'Your Email'}/>*/}
                 {/*<input className={classes.Input} type="text" name={'street'} placeholder={'Your Street'}/>*/}
@@ -135,7 +150,10 @@ class ContactData extends Component {
                     <Input
                         key={formElement.id}
                         elementType={formElement.data.elementType}
-                        elementConfig={formElement.data.elementConfig} value={formElement.data.value}/>
+                        elementConfig={formElement.data.elementConfig}
+                        value={formElement.data.value}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                    />
                 ))}
 
                 <Button buttonType={'Success'} clicked={this.orderHandler}>ORDER</Button>
