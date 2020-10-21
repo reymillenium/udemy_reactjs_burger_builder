@@ -124,9 +124,12 @@ class ContactData extends Component {
                 {/*<input className={classes.Input} type="text" name={'postal'} placeholder={'Your Postal Code'}/>*/}
 
                 <Input inputtype={'input'} type="text" name={'name'} placeholder={'Your Name'}/>
-                <Input inputtype={'input'} type="email" name={'email'} placeholder={'Your Email'}/>
                 <Input inputtype={'input'} type="text" name={'street'} placeholder={'Your Street'}/>
-                <Input inputtype={'input'} type="text" name={'postal'} placeholder={'Your Postal Code'}/>
+                <Input inputtype={'input'} type="text" name={'postal'} placeholder={'Your Zip Code'}/>
+                <Input inputtype={'input'} type="text" name={'country'} placeholder={'Your Country'}/>
+                <Input inputtype={'input'} type="email" name={'zipcode'} placeholder={'Your Email'}/>
+
+                <Input elementType={'...'} elementConfig={'...'} value={'...'}/>
 
                 <Button buttonType={'Success'} clicked={this.orderHandler}>ORDER</Button>
             </form>
