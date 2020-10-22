@@ -19,7 +19,12 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: ''
+                value: '',
+                validationRules: {
+                    required: true,
+                    minLength: 2
+                },
+                valid: false
             },
 
             street: {
@@ -28,7 +33,11 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Street'
                 },
-                value: ''
+                value: '',
+                validationRules: {
+                    required: true
+                },
+                valid: false
             },
 
 
@@ -38,7 +47,13 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Zip Code'
                 },
-                value: ''
+                value: '',
+                validationRules: {
+                    required: true,
+                    minLength: 5,
+                    maxLength: 5
+                },
+                valid: false
             },
 
             country: {
@@ -47,7 +62,11 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Country'
                 },
-                value: ''
+                value: '',
+                validationRules: {
+                    required: true
+                },
+                valid: false
             },
 
 
@@ -57,7 +76,11 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Your Email'
                 },
-                value: ''
+                value: '',
+                validationRules: {
+                    required: true
+                },
+                valid: false
             },
 
             deliveryMethod: {
@@ -104,6 +127,24 @@ class ContactData extends Component {
         // this.props.history.push("/checkout");
     }
 
+    checkValidity(value, validationRules) {
+        let isValid = true;
+
+        if (validationRules.required) {
+            isValid = (value.trim() === '' ? false : isValid);
+        }
+
+        if (validationRules.minLength) {
+            isValid = (value.length < validationRules.minLength ? false : isValid);
+        }
+
+        if (validationRules.maxLength) {
+            isValid = (value.length > validationRules.maxLength ? false : isValid);
+        }
+
+        return isValid;
+    }
+
     inputChangedHandler = (event, inputIdentifier) => {
         // This does not creates a deep clone:
         const updatedOrderForm = {
@@ -113,7 +154,9 @@ class ContactData extends Component {
             ...updatedOrderForm[inputIdentifier]
         }
         updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validationRules);
         updatedOrderForm[inputIdentifier] = updatedFormElement;
+        console.log(updatedFormElement);
         this.setState({
             orderForm: updatedOrderForm
         });
