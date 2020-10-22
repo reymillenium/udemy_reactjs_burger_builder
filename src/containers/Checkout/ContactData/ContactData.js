@@ -211,6 +211,7 @@ class ContactData extends Component {
                         elementType={formElement.data.elementType}
                         elementConfig={formElement.data.elementConfig}
                         value={formElement.data.value}
+                        valid={formElement.data.valid}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)}
                     />
                 ))}
