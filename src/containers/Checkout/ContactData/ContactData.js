@@ -52,7 +52,8 @@ class ContactData extends Component {
                 validationRules: {
                     required: true,
                     minLength: 5,
-                    maxLength: 5
+                    maxLength: 5,
+                    numbersOnly: true
                 },
                 valid: false
             },
@@ -151,12 +152,21 @@ class ContactData extends Component {
             isValid = (!this.hasOnlyNames(value) ? false : isValid);
         }
 
+        if (validationRules.numbersOnly) {
+            isValid = (!this.hasOnlyNumbers(value) ? false : isValid);
+        }
+
         return isValid;
     }
 
     hasOnlyLetters(inputString) {
         let letters = /^[A-Za-z]+$/;
         return inputString.match(letters);
+    }
+
+    hasOnlyNumbers(inputString) {
+        let numbers = /^\d+$/;
+        return inputString.match(numbers);
     }
 
     hasOnlyNames(inputString) {
