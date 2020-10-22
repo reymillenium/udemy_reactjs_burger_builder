@@ -79,23 +79,18 @@ class ContactData extends Component {
         // Prevents from sending the request and reload the page:
         event.preventDefault();
         // console.log('ContactData -> this.props.ingredients:', this.props.ingredients);
-        this.setState({
-            loading: true
-        });
+        this.setState({loading: true});
+
+        const formData = {};
+        for (let formElementIdentifier in this.state.orderForm) {
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
+        }
+
         // In a real price I would recalculate the price on the server
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {
-                name: "Reinier Garcia",
-                address: {
-                    street: '101 SW',
-                    zipCode: '33135',
-                    country: 'United States of America'
-                },
-                email: 'reymillenium@gmail.com'
-            },
-            deliveryMethod: 'fastest'
+            orderData: formData
         }
 
         axios.post('/orders.json', order)
@@ -133,7 +128,7 @@ class ContactData extends Component {
             });
         }
         let form = (
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {/*<input className={classes.Input} type="text" name={'name'} placeholder={'Your Name'}/>*/}
                 {/*<input className={classes.Input} type="email" name={'email'} placeholder={'Your Email'}/>*/}
                 {/*<input className={classes.Input} type="text" name={'street'} placeholder={'Your Street'}/>*/}
@@ -156,7 +151,7 @@ class ContactData extends Component {
                     />
                 ))}
 
-                <Button buttonType={'Success'} clicked={this.orderHandler}>ORDER</Button>
+                <Button buttonType={'Success'}>ORDER</Button>
             </form>
         );
         if (this.state.loading) {
