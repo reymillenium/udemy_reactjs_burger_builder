@@ -4,9 +4,12 @@ import classes from './Input.module.scss';
 const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
+    let validationError = null;
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
+        validationError = <p>Please enter a valid value!</p>;
+        // validationError = <p>Please enter a valid {props.key}!</p>;
     }
 
     switch (props.elementType) {
@@ -54,6 +57,7 @@ const input = (props) => {
                 {props.label}
             </label>
             {inputElement}
+            {validationError}
         </div>
     );
 }
