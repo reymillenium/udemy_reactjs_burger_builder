@@ -8,7 +8,9 @@ const button = (props) => (
         onClick={props.clicked}
         // className={[classes.Button, classes[props.buttonType]].join(' ')}>
         // Other way of using multiple classnames with CSS Modules in React (classnames package)
-        className={cx(classes.Button, classes[props.buttonType])}>
+        className={cx(classes.Button, classes[props.buttonType])}
+        disabled={props.disabled}
+    >
         {props.children}
     </button>
 );
