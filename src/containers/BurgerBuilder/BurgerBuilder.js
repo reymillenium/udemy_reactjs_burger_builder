@@ -8,6 +8,9 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import axios from '../../axios-orders';
 
+import {connect} from 'react-redux';
+import * as actionTypes from '../../store/actions';
+
 const INGREDIENT_PRICES = {
     salad: 0.50,
     cheese: 0.40,
@@ -34,18 +37,18 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
         // console.log(this.props);
-        axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
-            .then(response => {
-                this.setState({
-                    ingredients: response.data
-                })
-            }).catch(error => {
-                // Having a catch method allows to avoid executing the then method when an error is present
-                this.setState({
-                    error: true
-                });
-            }
-        );
+        // axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
+        //     .then(response => {
+        //         this.setState({
+        //             ingredients: response.data
+        //         })
+        //     }).catch(error => {
+        //         // Having a catch method allows to avoid executing the then method when an error is present
+        //         this.setState({
+        //             error: true
+        //         });
+        //     }
+        // );
     }
 
     addIngredientHandle = (type) => {
@@ -223,4 +226,22 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+
+const mapStateToProps = state => {
+    return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice,
+        purchasable: state.purchasable,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        // Dispatch functions:
+        onAddIngredient: (ingredientName) => dispatch({type: actionTypes.ADD_INGREDIENT, payload: {ingredientName: ingredientName}}),
+        onRemoveIngredient: (ingredientName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, payload: {ingredientName: ingredientName}})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
+// export default withErrorHandler(BurgerBuilder, axios);
