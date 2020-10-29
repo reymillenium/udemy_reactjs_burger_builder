@@ -8,7 +8,12 @@ const INGREDIENT_PRICES = {
 };
 
 const initialState = {
-    ingredients: null,
+    ingredients: {
+        salad: 0,
+        bacon: 0,
+        cheese: 0,
+        meat: 0
+    },
     totalPrice: 4,
     purchasable: false,
 }
@@ -16,59 +21,42 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
-            const oldCount = state.ingredients[action.payload.type];
-            const updateCount = oldCount + 1;
-            const updatedIngredients = {
-                ...state.ingredients
-            };
-            updatedIngredients[action.payload.type] = updateCount;
-            // this.state.ingredients[type] += 1;
-
-            const priceAddition = INGREDIENT_PRICES[action.payload.type];
-            const oldPrice = state.totalPrice;
-            const newPrice = (parseFloat(oldPrice) + parseFloat(priceAddition)).toFixed(2);
-
-            // this.updatePurchasableState(updatedIngredients);
-
-            return {
-                ...state,
-                ingredients: updatedIngredients,
-                totalPrice: newPrice,
-                purchasable: updatePurchasableState(updatedIngredients)
-
-            };
-        case actionTypes.REMOVE_INGREDIENT:
-            // const updatedArray = state.persons.filter(person => person.id !== action.payload.id);
+            // const oldCount = state.ingredients[action.payload.ingredientName];
+            // const updateCount = oldCount + 1;
+            // const updatedIngredients = {
+            //     ...state.ingredients
+            // };
+            // updatedIngredients[action.payload.ingredientName] = updateCount;
+            //
+            // const priceAddition = INGREDIENT_PRICES[action.payload.ingredientName];
+            // const oldPrice = state.totalPrice;
+            // const newPrice = (parseFloat(oldPrice) + parseFloat(priceAddition)).toFixed(2);
+            //
             // return {
             //     ...state,
-            //     persons: updatedArray
+            //     ingredients: updatedIngredients,
+            //     totalPrice: newPrice,
+            //     purchasable: updatePurchasableState(updatedIngredients)
+            //
             // };
-
-
-
-
-            const oldCount2 = state.ingredients[action.payload.type];
-
-            if (oldCount2 <= 0) {
-                return;
-            }
-            const updateCount2 = oldCount2 - 1;
-            const updatedIngredients2 = {
-                ...state.ingredients
-            };
-            updatedIngredients2[action.payload.type] = updateCount2;
-
-            const priceReduction2 = INGREDIENT_PRICES[action.payload.type];
-            const oldPrice2 = state.totalPrice;
-            const newPrice2 = (parseFloat(oldPrice2) - parseFloat(priceReduction2)).toFixed(2);
 
             return {
                 ...state,
-                ingredients: updatedIngredients2,
-                totalPrice: newPrice2,
-                purchasable: updatePurchasableState(updatedIngredients2)
-
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+                }
             };
+
+        case actionTypes.REMOVE_INGREDIENT:
+            return {
+                ...state,
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
+                }
+            };
+
         default:
             return {
                 ...state,
