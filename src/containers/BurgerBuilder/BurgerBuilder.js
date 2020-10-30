@@ -158,7 +158,7 @@ class BurgerBuilder extends Component {
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
-        queryParams.push('price=' + this.state.totalPrice);
+        queryParams.push('price=' + this.props.totalPrice);
         // console.log(queryParams);
 
         const queryString = queryParams.join('&');
@@ -188,7 +188,7 @@ class BurgerBuilder extends Component {
                         ingredientAdded={this.props.onAddIngredient}
                         ingredientRemoved={this.props.onRemoveIngredient}
                         disabledInfo={disabledInfo}
-                        price={parseFloat(this.state.totalPrice)}
+                        price={parseFloat(this.props.totalPrice)}
                         purchasable={this.state.purchasable}
                         ingredient_prices={INGREDIENT_PRICES}
                         order_click={this.purchasingHandler}
@@ -200,7 +200,7 @@ class BurgerBuilder extends Component {
                 ingredients={this.props.ingredients}
                 purchaseCanceled={this.purchasingCancelHandler}
                 purchaseContinue={this.purchaseContinueHandler}
-                total_price={parseFloat(this.state.totalPrice)}/>
+                total_price={parseFloat(this.props.totalPrice)}/>
         }
 
         if (this.state.loading) {
