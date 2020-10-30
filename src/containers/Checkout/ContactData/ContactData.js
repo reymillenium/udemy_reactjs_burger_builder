@@ -6,11 +6,13 @@ import classes from './ContactData.module.scss';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 
+import {connect} from 'react-redux';
+
 class ContactData extends Component {
     state = {
-        ingredients: this.props.ingredients,
+        // ingredients: this.props.ingredients,
 
-        price: this.props.price,
+        // price: this.props.price,
 
         orderForm: {
             name: {
@@ -100,7 +102,7 @@ class ContactData extends Component {
                 },
                 value: '',
                 validationRules: {},
-                valid: false,
+                valid: true,
                 touched: false
             }
         },
@@ -124,7 +126,7 @@ class ContactData extends Component {
         // In a real price I would recalculate the price on the server
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.price,
+            price: this.props.totalPrice,
             orderData: formData
         }
 
@@ -205,7 +207,7 @@ class ContactData extends Component {
             formIsValid = (!updatedOrderForm[inputIdentifier].valid ? false : formIsValid)
         }
         // console.log(this.state.formIsValid);
-        console.log(formIsValid);
+        // console.log(formIsValid);
         this.setState({
             orderForm: updatedOrderForm,
             formIsValid: formIsValid
@@ -265,4 +267,13 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+
+const mapStateToProps = state => {
+    return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice,
+    };
+};
+
+// export default ContactData;
+export default connect(mapStateToProps)(ContactData);
