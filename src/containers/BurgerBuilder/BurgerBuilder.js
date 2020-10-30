@@ -27,9 +27,9 @@ class BurgerBuilder extends Component {
 
     // More modern way to define the state on a class based container (stateful component):
     state = {
-        ingredients: null,
-        totalPrice: 4,
-        purchasable: false,
+        // ingredients: null,
+        // totalPrice: 4,
+        // purchasable: false,
         purchasing: false,
         loading: false,
         error: false
@@ -51,57 +51,61 @@ class BurgerBuilder extends Component {
         // );
     }
 
-    addIngredientHandle = (type) => {
-        const oldCount = this.state.ingredients[type];
-        const updateCount = oldCount + 1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        };
-        updatedIngredients[type] = updateCount;
-        // this.state.ingredients[type] += 1;
+    // addIngredientHandle = (type) => {
+    //     const oldCount = this.state.ingredients[type];
+    //     const updateCount = oldCount + 1;
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     };
+    //     updatedIngredients[type] = updateCount;
+    //     // this.state.ingredients[type] += 1;
+    //
+    //
+    //     const priceAddition = INGREDIENT_PRICES[type];
+    //     const oldPrice = this.state.totalPrice;
+    //     const newPrice = (parseFloat(oldPrice) + parseFloat(priceAddition)).toFixed(2);
+    //
+    //     this.setState({
+    //         ingredients: updatedIngredients,
+    //         totalPrice: newPrice
+    //     });
+    //
+    //     this.updatePurchasableState(updatedIngredients);
+    // }
 
+    // removeIngredientHandle = (type) => {
+    //     const oldCount = this.state.ingredients[type];
+    //
+    //     if (oldCount <= 0) {
+    //         return;
+    //     }
+    //     const updateCount = oldCount - 1;
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     };
+    //     updatedIngredients[type] = updateCount;
+    //
+    //     const priceReduction = INGREDIENT_PRICES[type];
+    //     const oldPrice = this.state.totalPrice;
+    //     const newPrice = (parseFloat(oldPrice) - parseFloat(priceReduction)).toFixed(2);
+    //
+    //     this.setState({
+    //         ingredients: updatedIngredients,
+    //         totalPrice: newPrice
+    //     });
+    //
+    //     this.updatePurchasableState(updatedIngredients);
+    // }
 
-        const priceAddition = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = (parseFloat(oldPrice) + parseFloat(priceAddition)).toFixed(2);
+    // updatePurchasableState(currentIngredients) {
+    //     const isNowPurchasable = Object.values(currentIngredients).some(el => el > 0)
+    //     this.setState({
+    //         purchasable: isNowPurchasable
+    //     });
+    // }
 
-        this.setState({
-            ingredients: updatedIngredients,
-            totalPrice: newPrice
-        });
-
-        this.updatePurchasableState(updatedIngredients);
-    }
-
-    removeIngredientHandle = (type) => {
-        const oldCount = this.state.ingredients[type];
-
-        if (oldCount <= 0) {
-            return;
-        }
-        const updateCount = oldCount - 1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        };
-        updatedIngredients[type] = updateCount;
-
-        const priceReduction = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = (parseFloat(oldPrice) - parseFloat(priceReduction)).toFixed(2);
-
-        this.setState({
-            ingredients: updatedIngredients,
-            totalPrice: newPrice
-        });
-
-        this.updatePurchasableState(updatedIngredients);
-    }
-
-    updatePurchasableState(currentIngredients) {
-        const isNowPurchasable = Object.values(currentIngredients).some(el => el > 0)
-        this.setState({
-            purchasable: isNowPurchasable
-        });
+    isPurchasable(currentIngredients) {
+        return Object.values(currentIngredients).some(el => el > 0)
     }
 
     purchasingHandler = () => {
@@ -189,7 +193,7 @@ class BurgerBuilder extends Component {
                         ingredientRemoved={this.props.onRemoveIngredient}
                         disabledInfo={disabledInfo}
                         price={parseFloat(this.props.totalPrice)}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.isPurchasable(this.props.ingredients)}
                         ingredient_prices={INGREDIENT_PRICES}
                         order_click={this.purchasingHandler}
                     />
