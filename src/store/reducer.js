@@ -45,7 +45,8 @@ const reducer = (state = initialState, action) => {
                 ingredients: {
                     ...state.ingredients,
                     [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1
-                }
+                },
+                totalPrice: parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName]).toFixed(2)
             };
 
         case actionTypes.REMOVE_INGREDIENT:
@@ -54,7 +55,8 @@ const reducer = (state = initialState, action) => {
                 ingredients: {
                     ...state.ingredients,
                     [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
-                }
+                },
+                totalPrice: parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName]).toFixed(2)
             };
 
         default:
