@@ -9,6 +9,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './store/reducer';
 
+// Declared the store, using redux Devtools:
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const app = (
