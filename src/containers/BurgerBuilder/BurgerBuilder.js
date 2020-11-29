@@ -10,7 +10,8 @@ import axios from '../../axios-orders';
 
 import {connect} from 'react-redux';
 // import * as actionTypes from '../../store/actions/actionTypes';
-import * as burgerBuilderActionCreators from "../../store/actions/burgerBuilderActionCreators";
+// import * as burgerBuilderActionCreators from "../../store/actions/burgerBuilderActionCreators";
+import * as actionCreators from "../../store/actions/index";
 
 const INGREDIENT_PRICES = {
     salad: 0.50,
@@ -250,8 +251,12 @@ const mapDispatchToProps = dispatch => {
         // onRemoveIngredient: (ingredientName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, payload: {ingredientName: ingredientName}})
 
         // Dispatch functions with action creators:
-        onAddIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.addIngredient(ingredientName)),
-        onRemoveIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.removeIngredient(ingredientName))
+        // onAddIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.addIngredient(ingredientName)),
+        // onRemoveIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.removeIngredient(ingredientName))
+
+        // Dispatch functions with action creators & grouping using a central file:
+        onAddIngredient: (ingredientName) => dispatch(actionCreators.addIngredient(ingredientName)),
+        onRemoveIngredient: (ingredientName) => dispatch(actionCreators.removeIngredient(ingredientName))
     };
 };
 
