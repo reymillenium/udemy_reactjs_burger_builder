@@ -9,7 +9,8 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import axios from '../../axios-orders';
 
 import {connect} from 'react-redux';
-import * as actionTypes from '../../store/actions/actionTypes';
+// import * as actionTypes from '../../store/actions/actionTypes';
+import * as burgerBuilderActionCreators from "../../store/actions/burgerBuilderActionCreators";
 
 const INGREDIENT_PRICES = {
     salad: 0.50,
@@ -244,9 +245,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // Dispatch functions:
-        onAddIngredient: (ingredientName) => dispatch({type: actionTypes.ADD_INGREDIENT, payload: {ingredientName: ingredientName}}),
-        onRemoveIngredient: (ingredientName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, payload: {ingredientName: ingredientName}})
+        // Dispatch functions (dispatches actions directly):
+        // onAddIngredient: (ingredientName) => dispatch({type: actionTypes.ADD_INGREDIENT, payload: {ingredientName: ingredientName}}),
+        // onRemoveIngredient: (ingredientName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, payload: {ingredientName: ingredientName}})
+
+        // Dispatch functions with action creators:
+        onAddIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.addIngredient(ingredientName)),
+        onRemoveIngredient: (ingredientName) => dispatch(burgerBuilderActionCreators.removeIngredient(ingredientName))
     };
 };
 
