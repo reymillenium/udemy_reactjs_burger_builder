@@ -18,7 +18,7 @@ const initialState = {
     // purchasable: false
 }
 
-const reducer = (state = initialState, action) => {
+const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
             // const oldCount = state.ingredients[action.payload.ingredientName];
@@ -72,4 +72,4 @@ const updatePurchasableState = (currentIngredients) => {
     return Object.values(currentIngredients).some(el => el > 0);
 }
 
-export default reducer;
+export default burgerBuilderReducer;
