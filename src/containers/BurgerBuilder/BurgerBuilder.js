@@ -39,18 +39,18 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
         // console.log(this.props);
-        // axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({
-        //             ingredients: response.data
-        //         })
-        //     }).catch(error => {
-        //         // Having a catch method allows to avoid executing the then method when an error is present
-        //         this.setState({
-        //             error: true
-        //         });
-        //     }
-        // );
+        axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({
+                    ingredients: response.data
+                })
+            }).catch(error => {
+                // Having a catch method allows to avoid executing the then method when an error is present
+                this.setState({
+                    error: true
+                });
+            }
+        );
     }
 
     // addIngredientHandle = (type) => {
