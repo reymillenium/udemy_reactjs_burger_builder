@@ -8,14 +8,17 @@ const INGREDIENT_PRICES = {
 };
 
 const initialState = {
-    ingredients: {
-        salad: 0,
-        bacon: 0,
-        cheese: 0,
-        meat: 0
-    },
-    totalPrice: 4
+    // ingredients: {
+    //     salad: 0,
+    //     bacon: 0,
+    //     cheese: 0,
+    //     meat: 0
+    // },
+    // Now we are fetching the initial ingredients from the web again:
+    ingredients: null,
+    totalPrice: 4,
     // purchasable: false
+    error: false
 }
 
 const burgerBuilderReducer = (state = initialState, action) => {
@@ -57,6 +60,19 @@ const burgerBuilderReducer = (state = initialState, action) => {
                     [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
                 },
                 totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            };
+
+        case actionTypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: action.payload.ingredients,
+                error: false
+            };
+
+        case actionTypes.FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error: true
             };
 
         default:

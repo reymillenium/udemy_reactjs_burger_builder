@@ -32,25 +32,28 @@ class BurgerBuilder extends Component {
         // ingredients: null,
         // totalPrice: 4,
         // purchasable: false,
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
+        // loading: false,
+        // error: false
     }
 
     componentDidMount() {
         // console.log(this.props);
-        axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
-            .then(response => {
-                this.setState({
-                    ingredients: response.data
-                })
-            }).catch(error => {
-                // Having a catch method allows to avoid executing the then method when an error is present
-                this.setState({
-                    error: true
-                });
-            }
-        );
+        // axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
+        //     .then(response => {
+        //         this.setState({
+        //             ingredients: response.data
+        //         })
+        //     }).catch(error => {
+        //         // Having a catch method allows to avoid executing the then method when an error is present
+        //         this.setState({
+        //             error: true
+        //         });
+        //     }
+        // );
+
+        // Using asynchronous redux-thunk:
+        this.props.onFetchInitialIngredients();
     }
 
     // addIngredientHandle = (type) => {
@@ -187,7 +190,7 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-        let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner/>
+        let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>
 
         if (this.props.ingredients) {
             burger = (
@@ -212,9 +215,9 @@ class BurgerBuilder extends Component {
                 total_price={parseFloat(this.props.totalPrice)}/>
         }
 
-        if (this.state.loading) {
-            orderSummary = <Spinner/>
-        }
+        // if (this.state.loading) {
+        //     orderSummary = <Spinner/>
+        // }
 
 
         // for (var key in disabledInfo) {
@@ -241,6 +244,7 @@ const mapStateToProps = state => {
         ingredients: state.ingredients,
         totalPrice: state.totalPrice,
         purchasable: state.purchasable,
+        error: state.error
     };
 };
 
@@ -256,7 +260,9 @@ const mapDispatchToProps = dispatch => {
 
         // Dispatch functions with action creators & grouping using a central file:
         onAddIngredient: (ingredientName) => dispatch(actionCreators.addIngredient(ingredientName)),
-        onRemoveIngredient: (ingredientName) => dispatch(actionCreators.removeIngredient(ingredientName))
+        onRemoveIngredient: (ingredientName) => dispatch(actionCreators.removeIngredient(ingredientName)),
+        onFetchInitialIngredients: () => dispatch(actionCreators.fetchInitialIngredients()),
+        onFetchIngredientsFailed: () => dispatch(actionCreators.fetchIngredientsFailed())
     };
 };
 

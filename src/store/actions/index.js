@@ -1,4 +1,6 @@
 export {
     addIngredient,
-    removeIngredient
+    removeIngredient,
+    fetchInitialIngredients,
+    fetchIngredientsFailed
 } from "./burgerBuilderActionCreators";
