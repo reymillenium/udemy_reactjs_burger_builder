@@ -243,7 +243,7 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
-        purchasable: state.burgerBuilder.purchasable,
+        // purchasable: state.burgerBuilder.purchasable,
         error: state.burgerBuilder.error
     };
 };
