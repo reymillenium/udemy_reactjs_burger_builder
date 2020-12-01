@@ -2,12 +2,12 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 // Synchronous Action creator:
-export const purchaseBurgerSuccess = (id, orderData) => {
+export const purchaseBurgerSuccess = (orderID, order) => {
     return {
         type: actionTypes.PURCHASE_BURGER_SUCCESS,
         payload: {
-            orderID: id,
-            orderData: orderData
+            orderID: orderID,
+            order: order
         }
     }
 };
