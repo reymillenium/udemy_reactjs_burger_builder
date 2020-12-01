@@ -6,7 +6,5 @@ export {
 } from "./burgerBuilderActionCreators";
 
 export {
-    purchaseBurgerSuccess,
-    purchaseBurgerFail,
-    purchaseBurgerStart
+    purchaseBurger
 } from "./orderFormActionCreators";

@@ -22,11 +22,18 @@ export const purchaseBurgerFail = (error) => {
     }
 };
 
+export const purchaseBurgerStart = () => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_START
+    }
+};
+
 // Asynchronous Action creator:
 // This is the action we dispatch from the container once we click that 'Order' button
-export const purchaseBurgerStart = (order) => {
+export const purchaseBurger = (order) => {
     // Using the redux-thunk middleware
     return dispatch => {
+        dispatch(purchaseBurgerStart());
         axios.post('/orders.json', order)
             .then(response => {
                 // this.setState({loading: false});

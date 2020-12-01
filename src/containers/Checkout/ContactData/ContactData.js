@@ -109,9 +109,9 @@ class ContactData extends Component {
             }
         },
 
-        formIsValid: false,
+        formIsValid: false
 
-        loading: false
+        // loading: false
     }
 
     orderHandler = (event) => {
@@ -132,7 +132,7 @@ class ContactData extends Component {
             orderData: formData
         }
 
-        this.props.onPurchaseBurgerStart(order);
+        this.props.onPurchaseBurger(order);
 
         // axios.post('/orders.json', order)
         //     .then(response => {
@@ -258,7 +258,7 @@ class ContactData extends Component {
                 <Button buttonType={'Success'} disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner/>;
         }
 
@@ -276,14 +276,14 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         totalPrice: state.totalPrice,
+        loading: state.loading
     };
 };
 
 // Using action creators
 const mapDispatchToProps = dispatch => {
     return {
-        onPurchaseBurgerStart: (order) => dispatch(actionCreators.purchaseBurgerStart(order)),
-
+        onPurchaseBurger: (order) => dispatch(actionCreators.purchaseBurger(order))
     };
 };
 
