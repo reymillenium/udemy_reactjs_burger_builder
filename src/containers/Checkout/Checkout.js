@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
 
 import {connect} from 'react-redux';
-import axios from "../../axios-orders";
 
 class Checkout extends Component {
     // state = {
@@ -43,22 +42,28 @@ class Checkout extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <CheckoutSummary
-                    ingredients={this.props.ingredients}
-                    checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}/>
+        let checkout = <Redirect to={"/"}/>
 
-                {/*<Route path={this.props.match.url + '/contact-data'}/>*/}
-                {/*<Route path={this.props.match.path + '/contact-data'} component={ContactData}/>*/}
-                <Route
-                    path={this.props.match.path + '/contact-data'}
-                    // render={(props) => (<ContactData ingredients={this.props.ingredients} price={this.props.totalPrice} {...props}/>)}
-                    component={ContactData}
-                />
-            </div>
-        );
+        if (this.props.ingredients) {
+            checkout = (
+                <div>
+                    <CheckoutSummary
+                        ingredients={this.props.ingredients}
+                        checkoutCancelled={this.checkoutCancelledHandler}
+                        checkoutContinued={this.checkoutContinuedHandler}/>
+
+                    {/*<Route path={this.props.match.url + '/contact-data'}/>*/}
+                    {/*<Route path={this.props.match.path + '/contact-data'} component={ContactData}/>*/}
+                    <Route
+                        path={this.props.match.path + '/contact-data'}
+                        // render={(props) => (<ContactData ingredients={this.props.ingredients} price={this.props.totalPrice} {...props}/>)}
+                        component={ContactData}
+                    />
+                </div>
+            );
+        }
+
+        return checkout;
     }
 }
 
