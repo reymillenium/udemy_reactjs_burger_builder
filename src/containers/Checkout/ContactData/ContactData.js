@@ -132,7 +132,7 @@ class ContactData extends Component {
             orderData: formData
         }
 
-        this.props.onPurchaseBurger(order);
+        this.props.onPurchaseBurger(order, this.props.history);
 
         // axios.post('/orders.json', order)
         //     .then(response => {
@@ -283,7 +283,7 @@ const mapStateToProps = state => {
 // Using action creators
 const mapDispatchToProps = dispatch => {
     return {
-        onPurchaseBurger: (order) => dispatch(actionCreators.purchaseBurger(order))
+        onPurchaseBurger: (order, history) => dispatch(actionCreators.purchaseBurger(order, history))
     };
 };
 

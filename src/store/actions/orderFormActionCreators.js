@@ -30,7 +30,7 @@ export const purchaseBurgerStart = () => {
 
 // Asynchronous Action creator:
 // This is the action we dispatch from the container once we click that 'Order' button
-export const purchaseBurger = (order) => {
+export const purchaseBurger = (order, history) => {
     // Using the redux-thunk middleware
     return dispatch => {
         dispatch(purchaseBurgerStart());
@@ -40,6 +40,7 @@ export const purchaseBurger = (order) => {
                 // this.props.history.push('/');
                 // console.log(response.data.name);
                 dispatch(purchaseBurgerSuccess(response.data.name, order));
+                history.push('/');
             }).catch(error => {
             // this.setState({loading: false});
             dispatch(purchaseBurgerFail(error));
