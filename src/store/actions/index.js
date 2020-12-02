@@ -1,3 +1,4 @@
+// burgerBuilderActionCreators
 export {
     addIngredient,
     removeIngredient,
@@ -5,6 +6,8 @@ export {
     fetchIngredientsFailed
 } from "./burgerBuilderActionCreators";
 
+// orderFormActionCreators
 export {
-    purchaseBurger
+    purchaseBurger,
+    purchaseInit
 } from "./orderFormActionCreators";

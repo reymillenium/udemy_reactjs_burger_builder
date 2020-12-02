@@ -40,10 +40,16 @@ export const purchaseBurger = (order, history) => {
                 // this.props.history.push('/');
                 // console.log(response.data.name);
                 dispatch(purchaseBurgerSuccess(response.data.name, order));
-                history.push('/');
+                // history.push('/');
             }).catch(error => {
             // this.setState({loading: false});
             dispatch(purchaseBurgerFail(error));
         });
+    }
+};
+
+export const purchaseInit = () => {
+    return {
+        type: actionTypes.PURCHASE_INIT
     }
 };
