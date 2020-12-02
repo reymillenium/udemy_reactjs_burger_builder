@@ -34,11 +34,6 @@ class Checkout extends Component {
     //     })
     // }
 
-    componentWillMount() {
-        // It resets purchased to false again:
-        this.props.onPurchaseInit();
-    }
-
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
     }
@@ -82,13 +77,7 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onPurchaseInit: () => dispatch(actionCreators.purchaseInit())
-    };
-};
-
 // export default Checkout;
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps)(Checkout);
 
 
