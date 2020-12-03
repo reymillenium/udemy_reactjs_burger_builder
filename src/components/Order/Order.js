@@ -17,10 +17,13 @@ const order = (props) => {
         <div className={classes.Order} key={props.id}>
             <p>
                 {/*Ingredients: Salad ({props.ingredients.salad}), Bacon ({props.ingredients.bacon}), Cheese ({props.ingredients.cheese}), Meat ({props.ingredients.meat})*/}
-                <strong>Ingredients:</strong> {ingredientsString}
+                <strong>Ingredients:</strong> {ingredientsString} <strong> => Price:</strong> <span>{props.price} USD</span>
             </p>
             <p>
-                Price: <strong>{props.price} USD</strong>
+                <strong>Name:</strong> <span>{props.orderData.name}</span> : <strong>Email:</strong> <span>{props.orderData.email}</span>
+            </p>
+            <p>
+                <strong>Address:</strong> <span>{props.orderData.street}, {props.orderData.zipCode}, {props.orderData.country}</span>
             </p>
         </div>
     );
