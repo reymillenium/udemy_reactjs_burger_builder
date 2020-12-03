@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders';
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 import {connect} from 'react-redux';
 import * as actionCreators from "../../store/actions";
@@ -44,18 +45,32 @@ class Orders extends Component {
     }
 
     render() {
+        let orders = <Spinner/>;
+        if (!this.props.loading) {
+            orders = this.props.orders.map(order => (
+                <Order
+                    key={order.id}
+                    price={order.price}
+                    ingredients={order.ingredients}
+                    orderData={order.orderData}
+                />
+            ))
+        }
+
         return (
             <div>
                 {/*{this.state.orders.map(order => (*/}
                 {/* Using redux instead of local state: */}
-                {this.props.orders.map(order => (
-                    <Order
-                        key={order.id}
-                        price={order.price}
-                        ingredients={order.ingredients}
-                        orderData={order.orderData}
-                    />
-                ))}
+                {/*{this.props.orders.map(order => (*/}
+                {/*    <Order*/}
+                {/*        key={order.id}*/}
+                {/*        price={order.price}*/}
+                {/*        ingredients={order.ingredients}*/}
+                {/*        orderData={order.orderData}*/}
+                {/*    />*/}
+                {/*))}*/}
+                {/* Adding a spinner when loading */}
+                {orders}
             </div>
         );
     }
@@ -64,7 +79,8 @@ class Orders extends Component {
 
 const mapStateToProps = state => {
     return {
-        orders: state.orderForm.orders
+        orders: state.orderForm.orders,
+        loading: state.orderForm.loading
     };
 };
 
