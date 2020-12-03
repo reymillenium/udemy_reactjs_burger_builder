@@ -66,6 +66,7 @@ const burgerBuilderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.payload.ingredients,
+                totalPrice: 4,
                 error: false
             };
 
