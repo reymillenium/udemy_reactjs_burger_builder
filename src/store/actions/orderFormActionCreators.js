@@ -88,6 +88,7 @@ export const fetchOrders = () => {
             .then(response => {
                 const fetchedOrders = [];
 
+                // Transforms the orders in array format
                 for (let key in response.data) {
                     fetchedOrders.push({
                         // Gets all the fields in the js object and then adds a new one (id)

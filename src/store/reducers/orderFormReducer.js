@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     orders: [],
     loading: false,
-    purchased: false
+    purchased: false,
+    errors: null
 }
 
 const orderFormReducer = (state = initialState, action) => {
@@ -37,6 +38,26 @@ const orderFormReducer = (state = initialState, action) => {
             return {
                 ...state,
                 purchased: false
+            };
+
+        case actionTypes.FETCH_ORDERS_START:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                orders: action.payload.orders
+            };
+
+        case actionTypes.FETCH_ORDERS_FAIL:
+            return {
+                ...state,
+                // error: action.payload.error,
+                loading: false
             };
 
         default:
