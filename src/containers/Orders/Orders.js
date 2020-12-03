@@ -3,44 +3,52 @@ import Order from '../../components/Order/Order'
 import axios from '../../axios-orders';
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
+import {connect} from 'react-redux';
+import * as actionCreators from "../../store/actions";
+
 class Orders extends Component {
     state = {
-        orders: [],
+        // We are now using redux instead of local state
+        // orders: [],
         loading: true
     }
 
     componentDidMount() {
-        axios.get('/orders.json')
-            .then(response => {
-                const fetchedOrders = [];
+        // axios.get('/orders.json')
+        //     .then(response => {
+        //         const fetchedOrders = [];
+        //
+        //         for (let key in response.data) {
+        //             fetchedOrders.push({
+        //                 // Gets all the fields in the js object and then adds a new one (id)
+        //                 ...response.data[key],
+        //                 id: key
+        //             });
+        //         }
+        //
+        //         // console.log('Orders -> fetchedOrders = ', fetchedOrders);
+        //
+        //         this.setState({
+        //             loading: false,
+        //             orders: fetchedOrders
+        //         });
+        //     })
+        //     .catch(error => {
+        //             this.setState({
+        //                 loading: false
+        //             });
+        //         }
+        //     );
 
-                for (let key in response.data) {
-                    fetchedOrders.push({
-                        // Gets all the fields in the js object and then adds a new one (id)
-                        ...response.data[key],
-                        id: key
-                    });
-                }
-
-                // console.log('Orders -> fetchedOrders = ', fetchedOrders);
-
-                this.setState({
-                    loading: false,
-                    orders: fetchedOrders
-                });
-            })
-            .catch(error => {
-                    this.setState({
-                        loading: false
-                    });
-                }
-            );
+        this.props.onFetchOrders();
     }
 
     render() {
         return (
             <div>
-                {this.state.orders.map(order => (
+                {/*{this.state.orders.map(order => (*/}
+                {/* Using redux instead of local state: */}
+                {this.props.orders.map(order => (
                     <Order
                         key={order.id}
                         price={order.price}
@@ -53,4 +61,19 @@ class Orders extends Component {
     }
 }
 
-export default withErrorHandler(Orders, axios);
+
+const mapStateToProps = state => {
+    return {
+        orders: state.orderForm.orders
+    };
+};
+
+// Using action creators
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchOrders: () => dispatch(actionCreators.fetchOrders())
+    };
+};
+
+// export default withErrorHandler(Orders, axios);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

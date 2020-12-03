@@ -9,5 +9,6 @@ export {
 // orderFormActionCreators
 export {
     purchaseBurger,
-    purchaseInit
+    purchaseInit,
+    fetchOrders
 } from "./orderFormActionCreators";
