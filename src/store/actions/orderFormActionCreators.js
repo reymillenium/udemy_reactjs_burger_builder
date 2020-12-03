@@ -53,3 +53,52 @@ export const purchaseInit = () => {
         type: actionTypes.PURCHASE_INIT
     }
 };
+
+// *** Fetching orders: ***
+
+export const fetchOrdersSuccess = (orders) => {
+    return {
+        type: actionTypes.FETCH_ORDERS_SUCCESS,
+        payload: {
+            orders: orders
+        }
+    }
+};
+
+export const fetchOrdersFail = (error) => {
+    return {
+        type: actionTypes.FETCH_ORDERS_FAIL,
+        payload: {
+            error: error
+        }
+    }
+};
+
+export const fetchOrdersStart = () => {
+    return {
+        type: actionTypes.FETCH_ORDERS_START
+    }
+};
+
+export const fetchOrders = () => {
+    // Using the redux-thunk middleware
+    return dispatch => {
+        dispatch(fetchOrdersStart());
+        axios.get('/orders.json')
+            .then(response => {
+                const fetchedOrders = [];
+
+                for (let key in response.data) {
+                    fetchedOrders.push({
+                        // Gets all the fields in the js object and then adds a new one (id)
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchOrdersSuccess(fetchedOrders));
+            })
+            .catch(error => {
+                dispatch(fetchOrdersFail(error));
+            });
+    };
+};
