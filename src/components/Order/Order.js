@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './Order.module.scss';
-import BurgerIngredient from "../Burger/BurgerIngredient/BurgerIngredient";
+// import BurgerIngredient from "../Burger/BurgerIngredient/BurgerIngredient";
 
 const order = (props) => {
     const capitalize = (string) => {
