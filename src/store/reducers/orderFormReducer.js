@@ -10,6 +10,14 @@ const initialState = {
 
 const orderFormReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.PURCHASE_INIT:
+            // return {
+            //     ...state,
+            //     purchased: false
+            // };
+
+            return updateObject(state, {purchased: false});
+
         case actionTypes.PURCHASE_BURGER_START:
             // return {
             //     ...state,
@@ -19,10 +27,10 @@ const orderFormReducer = (state = initialState, action) => {
             return updateObject(state, {loading: true});
 
         case actionTypes.PURCHASE_BURGER_SUCCESS:
-            const newOrder = {
-                ...action.payload.order,
-                id: action.payload.orderID
-            };
+            // const newOrder = {
+            //     ...action.payload.order,
+            //     id: action.payload.orderID
+            // };
             // return {
             //     ...state,
             //     loading: false,
@@ -31,6 +39,7 @@ const orderFormReducer = (state = initialState, action) => {
             //     orders: state.orders.concat(newOrder)
             // };
 
+            const newOrder = updateObject(action.payload.order, {id: action.payload.orderID});
             return updateObject(state, {loading: false, purchased: true, orders: state.orders.concat(newOrder)});
 
         case actionTypes.PURCHASE_BURGER_FAIL:
@@ -40,14 +49,6 @@ const orderFormReducer = (state = initialState, action) => {
             // };
 
             return updateObject(state, {loading: false});
-
-        case actionTypes.PURCHASE_INIT:
-            // return {
-            //     ...state,
-            //     purchased: false
-            // };
-
-            return updateObject(state, {purchased: false});
 
         case actionTypes.FETCH_ORDERS_START:
             // return {
