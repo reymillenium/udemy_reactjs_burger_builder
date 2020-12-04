@@ -8,6 +8,35 @@ const initialState = {
     errors: null
 }
 
+const purchaseInit = (state, action) => {
+    return updateObject(state, {purchased: false});
+};
+
+const purchaseBurgerStart = (state, action) => {
+    return updateObject(state, {loading: true});
+};
+
+const purchaseBurgerSuccess = (state, action) => {
+    const newOrder = updateObject(action.payload.order, {id: action.payload.orderID});
+    return updateObject(state, {loading: false, purchased: true, orders: state.orders.concat(newOrder)});
+};
+
+const purchaseBurgerFail = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
+const fetchOrdersStart = (state, action) => {
+    return updateObject(state, {loading: true});
+};
+
+const fetchOrdersSuccess = (state, action) => {
+    return updateObject(state, {loading: false, orders: action.payload.orders});
+};
+
+const fetchOrdersFail = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
 const orderFormReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.PURCHASE_INIT:
@@ -16,7 +45,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     purchased: false
             // };
 
-            return updateObject(state, {purchased: false});
+            // Using the utility function:
+            // return updateObject(state, {purchased: false});
+
+            // Calling another function:
+            return purchaseInit(state, action);
 
         case actionTypes.PURCHASE_BURGER_START:
             // return {
@@ -24,7 +57,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     loading: true
             // };
 
+            // Using the utility function:
             return updateObject(state, {loading: true});
+
+            // Calling another function:
+            purchaseBurgerStart(state, action);
 
         case actionTypes.PURCHASE_BURGER_SUCCESS:
             // const newOrder = {
@@ -39,8 +76,12 @@ const orderFormReducer = (state = initialState, action) => {
             //     orders: state.orders.concat(newOrder)
             // };
 
-            const newOrder = updateObject(action.payload.order, {id: action.payload.orderID});
-            return updateObject(state, {loading: false, purchased: true, orders: state.orders.concat(newOrder)});
+            // Using the utility function:
+            // const newOrder = updateObject(action.payload.order, {id: action.payload.orderID});
+            // return updateObject(state, {loading: false, purchased: true, orders: state.orders.concat(newOrder)});
+
+            // Calling another function:
+            purchaseBurgerSuccess(state, action);
 
         case actionTypes.PURCHASE_BURGER_FAIL:
             // return {
@@ -48,7 +89,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     loading: false
             // };
 
-            return updateObject(state, {loading: false});
+            // Using the utility function:
+            // return updateObject(state, {loading: false});
+
+            // Calling another function:
+            purchaseBurgerFail(state, action);
 
         case actionTypes.FETCH_ORDERS_START:
             // return {
@@ -56,7 +101,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     loading: true
             // };
 
-            return updateObject(state, {loading: true});
+            // Using the utility function:
+            // return updateObject(state, {loading: true});
+
+            // Calling another function:
+            return fetchOrdersStart(state, action);
 
         case actionTypes.FETCH_ORDERS_SUCCESS:
             // return {
@@ -65,7 +114,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     orders: action.payload.orders
             // };
 
-            return updateObject(state, {loading: false, orders: action.payload.orders});
+            // Using the utility function:
+            // return updateObject(state, {loading: false, orders: action.payload.orders});
+
+            // Calling another function:
+            return fetchOrdersSuccess(state, action);
 
         case actionTypes.FETCH_ORDERS_FAIL:
             // return {
@@ -74,7 +127,11 @@ const orderFormReducer = (state = initialState, action) => {
             //     loading: false
             // };
 
-            return updateObject(state, {loading: false});
+            // Using the utility function:
+            // return updateObject(state, {loading: false});
+
+            // Calling another function:
+            return fetchOrdersFail(state, action);
 
         default:
             return {
