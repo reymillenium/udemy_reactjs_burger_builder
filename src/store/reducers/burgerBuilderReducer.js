@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import {updateObject} from '../utility';
 
 const INGREDIENT_PRICES = {
     salad: 0.50,
@@ -43,14 +44,31 @@ const burgerBuilderReducer = (state = initialState, action) => {
             //
             // };
 
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1
-                },
+            // return {
+            //     ...state,
+            //     ingredients: {
+            //         ...state.ingredients,
+            //         [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1
+            //     },
+            //     totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            // };
+
+            // const updatedIngredient = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
+            // const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+            // return {
+            //     ...state.ingredients,
+            //     ingredients: updatedIngredients,
+            //     totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            // };
+
+
+            const updatedIngredient = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
+            const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+            const updatedState = {
+                ingredients: updatedIngredients,
                 totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
-            };
+            }
+            return updateObject(state, updatedState);
 
         case actionTypes.REMOVE_INGREDIENT:
             return {
