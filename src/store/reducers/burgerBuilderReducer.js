@@ -22,6 +22,26 @@ const initialState = {
     error: false
 }
 
+const addIngredient = (state, action) => {
+    const updatedIngredientAdded = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
+    const updatedIngredientsAdded = updateObject(state.ingredients, updatedIngredientAdded);
+    const updatedStateAdded = {
+        ingredients: updatedIngredientsAdded,
+        totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+    }
+    return updateObject(state, updatedStateAdded);
+}
+
+const removeIngredient = (state, action) => {
+    const updatedIngredientRemoved = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1}
+    const updatedIngredientsRemoved = updateObject(state.ingredients, updatedIngredientRemoved);
+    const updatedStateRemoved = {
+        ingredients: updatedIngredientsRemoved,
+        totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+    }
+    return updateObject(state, updatedStateRemoved);
+}
+
 const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
@@ -61,14 +81,18 @@ const burgerBuilderReducer = (state = initialState, action) => {
             //     totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
             // };
 
+            // Using the utility function:
+            // const updatedIngredientAdded = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
+            // const updatedIngredientsAdded = updateObject(state.ingredients, updatedIngredientAdded);
+            // const updatedStateAdded = {
+            //     ingredients: updatedIngredientsAdded,
+            //     totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            // }
+            // return updateObject(state, updatedStateAdded);
 
-            const updatedIngredientAdded = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
-            const updatedIngredientsAdded = updateObject(state.ingredients, updatedIngredientAdded);
-            const updatedStateAdded = {
-                ingredients: updatedIngredientsAdded,
-                totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
-            }
-            return updateObject(state, updatedStateAdded);
+            // Calling another function:
+            return addIngredient(state, action);
+
 
         case actionTypes.REMOVE_INGREDIENT:
             // return {
@@ -80,13 +104,17 @@ const burgerBuilderReducer = (state = initialState, action) => {
             //     totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
             // };
 
-            const updatedIngredientRemoved = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1}
-            const updatedIngredientsRemoved = updateObject(state.ingredients, updatedIngredientRemoved);
-            const updatedStateRemoved = {
-                ingredients: updatedIngredientsRemoved,
-                totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
-            }
-            return updateObject(state, updatedStateRemoved);
+            // Using the utility function:
+            // const updatedIngredientRemoved = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1}
+            // const updatedIngredientsRemoved = updateObject(state.ingredients, updatedIngredientRemoved);
+            // const updatedStateRemoved = {
+            //     ingredients: updatedIngredientsRemoved,
+            //     totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            // }
+            // return updateObject(state, updatedStateRemoved);
+
+            // Calling another function:
+            return removeIngredient(state, action);
 
         case actionTypes.SET_INGREDIENTS:
             // return {
@@ -96,6 +124,7 @@ const burgerBuilderReducer = (state = initialState, action) => {
             //     error: false
             // };
 
+            // Using the utility function:
             return updateObject(state, {ingredients: action.payload.ingredients, totalPrice: 4, error: false});
 
         case actionTypes.FETCH_INGREDIENTS_FAILED:
@@ -104,6 +133,7 @@ const burgerBuilderReducer = (state = initialState, action) => {
             //     error: true
             // };
 
+            // Using the utility function:
             return updateObject(state, {error: true});
 
         default:
