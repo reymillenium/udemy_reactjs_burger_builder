@@ -62,23 +62,31 @@ const burgerBuilderReducer = (state = initialState, action) => {
             // };
 
 
-            const updatedIngredient = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
-            const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
-            const updatedState = {
-                ingredients: updatedIngredients,
+            const updatedIngredientAdded = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1}
+            const updatedIngredientsAdded = updateObject(state.ingredients, updatedIngredientAdded);
+            const updatedStateAdded = {
+                ingredients: updatedIngredientsAdded,
                 totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
             }
-            return updateObject(state, updatedState);
+            return updateObject(state, updatedStateAdded);
 
         case actionTypes.REMOVE_INGREDIENT:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
-                },
+            // return {
+            //     ...state,
+            //     ingredients: {
+            //         ...state.ingredients,
+            //         [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
+            //     },
+            //     totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+            // };
+
+            const updatedIngredientRemoved = {[action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1}
+            const updatedIngredientsRemoved = updateObject(state.ingredients, updatedIngredientRemoved);
+            const updatedStateRemoved = {
+                ingredients: updatedIngredientsRemoved,
                 totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
-            };
+            }
+            return updateObject(state, updatedStateRemoved);
 
         case actionTypes.SET_INGREDIENTS:
             return {
