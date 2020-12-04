@@ -89,12 +89,14 @@ const burgerBuilderReducer = (state = initialState, action) => {
             return updateObject(state, updatedStateRemoved);
 
         case actionTypes.SET_INGREDIENTS:
-            return {
-                ...state,
-                ingredients: action.payload.ingredients,
-                totalPrice: 4,
-                error: false
-            };
+            // return {
+            //     ...state,
+            //     ingredients: action.payload.ingredients,
+            //     totalPrice: 4,
+            //     error: false
+            // };
+
+            return updateObject(state, {ingredients: action.payload.ingredients, totalPrice: 4, error: false});
 
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return {
