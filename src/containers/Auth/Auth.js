@@ -9,6 +9,7 @@ import classes from "./Auth.module.scss";
 import axios from '../../axios-orders';
 
 import {connect} from 'react-redux';
+import * as actionCreators from "../../store/actions";
 
 class Auth extends Component {
     state = {
@@ -48,13 +49,15 @@ class Auth extends Component {
     }
 
     authHandler = (event) => {
-        // Prevents from sending the request and reload the page:
+        // Prevents from sending the request and reloading the page:
         event.preventDefault();
 
         const formData = {};
         for (let formElementIdentifier in this.state.controls) {
             formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value
         }
+
+        this.props.onAuth(formData['email'], formData['password']);
     }
 
     checkValidity(value, validationRules) {
@@ -197,6 +200,12 @@ const mapStateToProps = state => {
     };
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(actionCreators.auth(email, password))
+    };
+};
+
 // export default Auth;
 // export default withErrorHandler(Auth, axios);
-export default connect(mapStateToProps)(withErrorHandler(Auth, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Auth, axios));
