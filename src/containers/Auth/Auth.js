@@ -80,6 +80,10 @@ class Auth extends Component {
             isValid = (!this.hasOnlyNames(value) ? false : isValid);
         }
 
+        if (validationRules && validationRules.isEmail) {
+            isValid = (!this.hasValidEmail(value) ? false : isValid);
+        }
+
         if (validationRules && validationRules.numbersOnly) {
             isValid = (!this.hasOnlyNumbers(value) ? false : isValid);
         }
@@ -97,6 +101,12 @@ class Auth extends Component {
         return inputString.match(numbers);
     }
 
+    hasValidEmail(inputString) {
+        const validEmailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // return inputString.match(validEmailPattern);
+        return validEmailPattern.test(inputString);
+    }
+
     hasOnlyNames(inputString) {
         // let lettersAndSpaces = /^[a-zA-Z]+( [a-zA-Z]+)+$/;
         // let lettersAndSpaces = /^[A-Za-z\s]+$/;
@@ -106,16 +116,27 @@ class Auth extends Component {
 
     inputChangedHandler = (event, inputIdentifier) => {
         // This does not creates a deep clone:
+        // const updatedAuthForm = {
+        //     ...this.state.controls
+        // }
+        // const updatedFormElement = {
+        //     ...updatedAuthForm[inputIdentifier]
+        // }
+        // updatedFormElement.value = event.target.value;
+        // updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validationRules);
+        // updatedFormElement.touched = true
+        // updatedAuthForm[inputIdentifier] = updatedFormElement;
+
+        // Exactly the same:
         const updatedAuthForm = {
-            ...this.state.controls
-        }
-        const updatedFormElement = {
-            ...updatedAuthForm[inputIdentifier]
-        }
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validationRules);
-        updatedFormElement.touched = true
-        updatedAuthForm[inputIdentifier] = updatedFormElement;
+            ...this.state.controls,
+            [inputIdentifier]: {
+                ...this.state.controls[inputIdentifier],
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
+                touched: true
+            }
+        };
 
         let formIsValid = true;
         for (let inputIdentifier in updatedAuthForm) {
