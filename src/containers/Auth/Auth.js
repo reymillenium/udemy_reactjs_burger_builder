@@ -3,6 +3,13 @@ import React, {Component} from "react";
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import classes from "./Auth.module.scss";
+import axios from '../../axios-orders';
+
+import {connect} from 'react-redux';
+
 class Auth extends Component {
     state = {
         controls: {
@@ -131,18 +138,6 @@ class Auth extends Component {
 
         let form = (
             <form onSubmit={this.authHandler}>
-                {/*<input className={classes.Input} type="text" name={'name'} placeholder={'Your Name'}/>*/}
-                {/*<input className={classes.Input} type="email" name={'email'} placeholder={'Your Email'}/>*/}
-                {/*<input className={classes.Input} type="text" name={'street'} placeholder={'Your Street'}/>*/}
-                {/*<input className={classes.Input} type="text" name={'postal'} placeholder={'Your Postal Code'}/>*/}
-
-                {/*<Input inputtype={'input'} type="text" name={'name'} placeholder={'Your Name'}/>*/}
-                {/*<Input inputtype={'input'} type="text" name={'street'} placeholder={'Your Street'}/>*/}
-                {/*<Input inputtype={'input'} type="text" name={'postal'} placeholder={'Your Zip Code'}/>*/}
-                {/*<Input inputtype={'input'} type="text" name={'country'} placeholder={'Your Country'}/>*/}
-                {/*<Input inputtype={'input'} type="email" name={'zipcode'} placeholder={'Your Email'}/>*/}
-
-                {/*<Input elementType={'...'} elementConfig={'...'} value={'...'}/>*/}
                 {formElementsArray.map(formElement => (
                     <Input
                         key={formElement.id}
@@ -157,18 +152,30 @@ class Auth extends Component {
                     />
                 ))}
 
-                <Button buttonType={'Success'} disabled={!this.state.formIsValid}>ORDER</Button>
+                <Button buttonType={'Success'} disabled={!this.state.formIsValid}>LOGIN</Button>
             </form>
         );
+        if (this.props.loading) {
+            form = <Spinner/>;
+        }
 
         return (
             <div>
-                <form action="">
-
-                </form>
+                <div className={classes.Auth}>
+                    <h4>Login</h4>
+                    {form}
+                </div>
             </div>
         );
     }
 }
 
-export default Auth;
+const mapStateToProps = state => {
+    return {
+        loading: state.orderForm.loading
+    };
+};
+
+// export default Auth;
+// export default withErrorHandler(Auth, axios);
+export default connect(mapStateToProps)(withErrorHandler(Auth, axios));
