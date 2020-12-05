@@ -12,3 +12,8 @@ export {
     purchaseInit,
     fetchOrders
 } from "./orderFormActionCreators";
+
+// authActionCreators
+export {
+    auth
+} from "./authActionCreators";
