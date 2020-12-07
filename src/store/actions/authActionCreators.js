@@ -22,9 +22,26 @@ export const authFail = (error) => {
 };
 
 export const auth = (email, password) => {
+    const api_key = 'AIzaSyDY5is_OJC4q4A8dpPeeTjyF5I4dLWTzJQ';
     return dispatch => {
         dispatch(authStart());
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]');
+        const authData = {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        }
+        // axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]');
+        axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${api_key}`, authData)
+            .then(response => {
+                console.log(response);
+                dispatch(authSuccess(response.data));
+            })
+            .catch(
+                error => {
+                    console.log(error);
+                    dispatch(authFail(error));
+                }
+            );
     };
 };
 
