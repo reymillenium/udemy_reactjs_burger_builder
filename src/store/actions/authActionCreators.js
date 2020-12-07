@@ -21,10 +21,12 @@ export const authFail = (error) => {
     };
 };
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
     const apiKey = 'AIzaSyDY5is_OJC4q4A8dpPeeTjyF5I4dLWTzJQ';
-    const signInWithCustomTokenEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${apiKey}`;
+    // const signInWithCustomTokenEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${apiKey}`;
     const signUpWithEmailAndPasswordEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
+    const signInWithEmailAndPasswordEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
+    let endPointURL = isSignUp ? signUpWithEmailAndPasswordEndPoint : signInWithEmailAndPasswordEndPoint;
 
     return dispatch => {
         dispatch(authStart());
@@ -34,7 +36,7 @@ export const auth = (email, password) => {
             returnSecureToken: true
         }
 
-        axios.post(signUpWithEmailAndPasswordEndPoint, authData)
+        axios.post(endPointURL, authData)
             .then(response => {
                 console.log('response = ', response);
                 dispatch(authSuccess(response.data));

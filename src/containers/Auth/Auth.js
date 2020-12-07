@@ -45,19 +45,21 @@ class Auth extends Component {
             }
         },
 
-        formIsValid: false
+        formIsValid: false,
+        isSignUp: true
     }
 
     authHandler = (event) => {
         // Prevents from sending the request and reloading the page:
         event.preventDefault();
+        let isSignUp = this.state.isSignUp;
 
         const formData = {};
         for (let formElementIdentifier in this.state.controls) {
             formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value
         }
 
-        this.props.onAuth(formData['email'], formData['password']);
+        this.props.onAuth(formData['email'], formData['password'], isSignUp);
     }
 
     checkValidity(value, validationRules) {
@@ -151,6 +153,14 @@ class Auth extends Component {
         });
     }
 
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {
+                isSignUp: !prevState.isSignUp
+            }
+        });
+    }
+
     render() {
         const formElementsArray = [];
         for (let key in this.state.controls) {
@@ -188,6 +198,12 @@ class Auth extends Component {
                 <div className={classes.Auth}>
                     <h4>Login</h4>
                     {form}
+                    <Button
+                        buttonType={'Danger'}
+                        disabled={!this.state.formIsValid}
+                        clicked={this.switchAuthModeHandler}>
+                        {"SWITCH TO " + (this.state.isSignUp ? "SIGN IN" : "SIGN UP")}
+                    </Button>
                 </div>
             </div>
         );
@@ -202,7 +218,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actionCreators.auth(email, password))
+        onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp))
     };
 };
 
