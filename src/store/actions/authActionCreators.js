@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios-orders';
+import axios from 'axios';
 
 export const authStart = () => {
     return {
@@ -22,7 +22,10 @@ export const authFail = (error) => {
 };
 
 export const auth = (email, password) => {
-    const api_key = 'AIzaSyDY5is_OJC4q4A8dpPeeTjyF5I4dLWTzJQ';
+    const apiKey = 'AIzaSyDY5is_OJC4q4A8dpPeeTjyF5I4dLWTzJQ';
+    const signInWithCustomTokenEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${apiKey}`;
+    const signUpWithEmailAndPasswordEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
+
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -30,15 +33,14 @@ export const auth = (email, password) => {
             password: password,
             returnSecureToken: true
         }
-        // axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]');
-        axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${api_key}`, authData)
+
+        axios.post(signUpWithEmailAndPasswordEndPoint, authData)
             .then(response => {
-                console.log(response);
+                console.log('response = ', response);
                 dispatch(authSuccess(response.data));
             })
-            .catch(
-                error => {
-                    console.log(error);
+            .catch(error => {
+                    console.log('error = ', error);
                     dispatch(authFail(error));
                 }
             );
