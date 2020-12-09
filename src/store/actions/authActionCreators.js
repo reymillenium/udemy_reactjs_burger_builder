@@ -26,6 +26,21 @@ export const authFail = (error) => {
     };
 };
 
+export const checkAuthTimeOut = (expirationTime) => {
+    // Returns a function that gets dispatch as an argument:
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logOut());
+        }, expirationTime * 1000);
+    }
+};
+
+export const logOut = () => {
+    return {
+        type: actionTypes.AUTH_LOG_OUT
+    }
+};
+
 export const auth = (email, password, isSignUp) => {
     const apiKey = process.env.REACT_APP_API_KEY;
     // const signInWithCustomTokenEndPoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${apiKey}`;
@@ -45,6 +60,7 @@ export const auth = (email, password, isSignUp) => {
             .then(response => {
                 console.log('response.data = ', response.data);
                 dispatch(authSuccess(response.data));
+                dispatch(checkAuthTimeOut(response.data.expiresIn));
             })
             .catch(error => {
                     console.log('error = ', error);
