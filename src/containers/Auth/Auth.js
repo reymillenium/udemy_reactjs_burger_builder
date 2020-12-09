@@ -18,7 +18,8 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'email',
-                    placeholder: 'Your Email'
+                    placeholder: 'Your Email',
+                    autoComplete: 'username'
                 },
                 value: '',
                 validationRules: {
@@ -33,7 +34,8 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'password',
-                    placeholder: 'Your password'
+                    placeholder: 'Your password',
+                    autoComplete: 'current-password'
                 },
                 value: '',
                 validationRules: {
