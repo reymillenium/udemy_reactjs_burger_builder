@@ -2,9 +2,9 @@ import React, {Component} from "react";
 
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import Spinner from "../../components/UI/Spinner/Spinner";
 import classes from "./Auth.module.scss";
 import axios from '../../axios-orders';
 
@@ -212,7 +212,7 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.orderForm.loading
+        loading: state.auth.loading
     };
 };
 
