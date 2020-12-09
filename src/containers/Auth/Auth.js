@@ -186,7 +186,7 @@ class Auth extends Component {
                     />
                 ))}
 
-                <Button buttonType={'Success'} disabled={!this.state.formIsValid}>LOGIN</Button>
+                <Button buttonType={'Success'} disabled={!this.state.formIsValid}>{(this.state.isSignUp ? "SIGN UP" : "SIGN IN")}</Button>
             </form>
         );
         if (this.props.loading) {
@@ -196,7 +196,7 @@ class Auth extends Component {
         return (
             <div>
                 <div className={classes.Auth}>
-                    <h4>Login</h4>
+                    <h4>{(this.state.isSignUp ? "SIGN UP" : "SIGN IN") + " FORM"}</h4>
                     {form}
                     <Button
                         buttonType={'Danger'}
