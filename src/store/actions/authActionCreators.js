@@ -48,7 +48,8 @@ export const auth = (email, password, isSignUp) => {
             })
             .catch(error => {
                     console.log('error = ', error);
-                    dispatch(authFail(error));
+                    //  The received error is an object from axios (that wraps the response), but we need the error from Firebase:
+                    dispatch(authFail(error.response.data.error));
                 }
             );
     };

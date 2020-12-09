@@ -193,10 +193,19 @@ class Auth extends Component {
             form = <Spinner/>;
         }
 
+        let errorMessage = null;
+        // Message property from Firebase:
+        if (this.props.error) {
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            );
+        }
+
         return (
             <div>
                 <div className={classes.Auth}>
                     <h4>{(this.state.isSignUp ? "SIGN UP" : "SIGN IN") + " FORM"}</h4>
+                    {errorMessage}
                     {form}
                     <Button
                         buttonType={'Danger'}
@@ -212,7 +221,8 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        error: state.auth.error
     };
 };
 
