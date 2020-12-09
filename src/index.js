@@ -11,12 +11,12 @@ import {Provider} from 'react-redux';
 
 import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
 import orderFormReducer from "./store/reducers/orderFormReducer";
-import AuthReducer from "./store/reducers/AuthReducer";
+import authReducer from "./store/reducers/authReducer";
 
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
     orderForm: orderFormReducer,
-    auth: AuthReducer
+    auth: authReducer
 });
 
 // Declared the store, using redux Devtools (no middlewares yet):
