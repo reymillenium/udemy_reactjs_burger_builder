@@ -58,10 +58,10 @@ const orderFormReducer = (state = initialState, action) => {
             // };
 
             // Using the utility function:
-            return updateObject(state, {loading: true});
+            // return updateObject(state, {loading: true});
 
             // Calling another function:
-            purchaseBurgerStart(state, action);
+            return purchaseBurgerStart(state, action);
 
         case actionTypes.PURCHASE_BURGER_SUCCESS:
             // const newOrder = {
@@ -81,7 +81,7 @@ const orderFormReducer = (state = initialState, action) => {
             // return updateObject(state, {loading: false, purchased: true, orders: state.orders.concat(newOrder)});
 
             // Calling another function:
-            purchaseBurgerSuccess(state, action);
+            return purchaseBurgerSuccess(state, action);
 
         case actionTypes.PURCHASE_BURGER_FAIL:
             // return {
@@ -93,7 +93,7 @@ const orderFormReducer = (state = initialState, action) => {
             // return updateObject(state, {loading: false});
 
             // Calling another function:
-            purchaseBurgerFail(state, action);
+            return purchaseBurgerFail(state, action);
 
         case actionTypes.FETCH_ORDERS_START:
             // return {
