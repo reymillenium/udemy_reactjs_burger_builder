@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import Auxiliary from '../Auxiliary/Auxiliary';
 import classes from './Layout.module.scss';
 
+import {connect} from "react-redux";
+
 class Layout extends Component {
     state = {
         showSideDrawer: false
@@ -38,8 +40,12 @@ class Layout extends Component {
     render() {
         return (
             <Auxiliary>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                <Toolbar
+                    isAuth={this.props.isAuthenticated}
+                    drawerToggleClicked={this.sideDrawerToggleHandler}
+                />
                 <SideDrawer
+                    isAuth={this.props.isAuthenticated}
                     show={this.state.showSideDrawer}
                     close={this.sideDrawerCloseHandler}/>
                 <main className={classes.Content}>
@@ -55,4 +61,11 @@ Layout.propTypes = {
     children: PropTypes.object
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.idToken !== null
+    };
+};
+
+// export default Layout;
+export default connect(mapStateToProps)(Layout);
