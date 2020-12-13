@@ -38,7 +38,6 @@ export const purchaseBurger = (order, token) => {
             .then(response => {
                 // this.setState({loading: false});
                 // this.props.history.push('/');
-                // console.log(response.data.name);
                 dispatch(purchaseBurgerSuccess(response.data.name, order));
                 // history.push('/');
             }).catch(error => {
