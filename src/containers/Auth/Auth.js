@@ -48,7 +48,7 @@ class Auth extends Component {
         },
 
         formIsValid: false,
-        isSignUp: true
+        isSignUp: false
     }
 
     authHandler = (event) => {
