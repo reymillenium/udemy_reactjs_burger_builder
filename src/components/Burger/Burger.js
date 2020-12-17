@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import classes from './Burger.module.scss';
 
 const burger = (props) => {
-    // console.log('Burger ->', props);
     const ingredients_array_of_arrays = Object.keys(props.ingredients)
         .map(ingredient_key => {
             return [...Array(props.ingredients[ingredient_key])].map((_, i) => {
@@ -22,7 +21,6 @@ const burger = (props) => {
     //     return arr.concat(el)
     // }, []);
     let ingredients_array = ingredients_array_of_arrays.flat(1);
-    // console.log(ingredients_array_of_arrays);
     // console.log(ingredients_array);
     // console.log(Object.values(props.ingredients));
     // console.log(Object.values(props.ingredients).some(el => el > 0));
