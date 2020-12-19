@@ -10,6 +10,7 @@ import axios from '../../axios-orders';
 
 import {connect} from 'react-redux';
 import * as actionCreators from "../../store/actions";
+import {Redirect} from 'react-router-dom';
 
 class Auth extends Component {
     state = {
@@ -203,10 +204,17 @@ class Auth extends Component {
             );
         }
 
+        let authRedirect = null;
+        // Redirects if the user is not authenticated:
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={'/'}/>;
+        }
+
         return (
             <div>
                 <div className={classes.Auth}>
                     <h4>{(this.state.isSignUp ? "SIGN UP" : "SIGN IN") + " FORM"}</h4>
+                    {authRedirect}
                     {errorMessage}
                     {form}
                     <Button
@@ -224,7 +232,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.idToken !== null
     };
 };
 
