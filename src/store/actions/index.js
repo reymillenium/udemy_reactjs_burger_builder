@@ -16,5 +16,6 @@ export {
 // authActionCreators
 export {
     auth,
-    logOut
+    logOut,
+    setAuthRedirectPath
 } from "./authActionCreators";
