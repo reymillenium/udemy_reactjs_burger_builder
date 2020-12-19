@@ -206,6 +206,7 @@ class BurgerBuilder extends Component {
                         purchasable={this.isPurchasable(this.props.ingredients)}
                         ingredient_prices={INGREDIENT_PRICES}
                         order_click={this.purchasingHandler}
+                        isAuthenticated={this.props.isAuthenticated}
                     />
                 </Auxiliary>
             );
@@ -246,7 +247,8 @@ const mapStateToProps = state => {
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
         // purchasable: state.burgerBuilder.purchasable,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        isAuthenticated: state.auth.idToken !== null
     };
 };
 
