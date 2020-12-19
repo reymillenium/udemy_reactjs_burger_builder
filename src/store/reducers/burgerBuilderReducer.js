@@ -5,7 +5,8 @@ const INGREDIENT_PRICES = {
     salad: 0.50,
     cheese: 0.40,
     meat: 1.30,
-    bacon: 0.70
+    bacon: 0.70,
+    building: false
 };
 
 const initialState = {
@@ -27,7 +28,8 @@ const addIngredient = (state, action) => {
     const updatedIngredientsAdded = updateObject(state.ingredients, updatedIngredientAdded);
     const updatedStateAdded = {
         ingredients: updatedIngredientsAdded,
-        totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+        totalPrice: (parseFloat(state.totalPrice) + parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2),
+        building: true
     }
     return updateObject(state, updatedStateAdded);
 }
@@ -37,10 +39,24 @@ const removeIngredient = (state, action) => {
     const updatedIngredientsRemoved = updateObject(state.ingredients, updatedIngredientRemoved);
     const updatedStateRemoved = {
         ingredients: updatedIngredientsRemoved,
-        totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2)
+        totalPrice: (parseFloat(state.totalPrice) - parseFloat(INGREDIENT_PRICES[action.payload.ingredientName])).toFixed(2),
+        building: true
     }
     return updateObject(state, updatedStateRemoved);
 }
+
+const setIngredients = (state, action) => {
+    return updateObject(state, {
+        ingredients: action.payload.ingredients,
+        totalPrice: 4,
+        error: false,
+        building: false // We are starting from scratch
+    });
+};
+
+const fetchIngredientsFailed = (state, action) => {
+    return updateObject(state, {error: true});
+};
 
 const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -125,7 +141,10 @@ const burgerBuilderReducer = (state = initialState, action) => {
             // };
 
             // Using the utility function:
-            return updateObject(state, {ingredients: action.payload.ingredients, totalPrice: 4, error: false});
+            // return updateObject(state, {ingredients: action.payload.ingredients, totalPrice: 4, error: false});
+
+            // Calling another function:
+            return setIngredients(state, action);
 
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             // return {
@@ -134,7 +153,10 @@ const burgerBuilderReducer = (state = initialState, action) => {
             // };
 
             // Using the utility function:
-            return updateObject(state, {error: true});
+            // return updateObject(state, {error: true});
+
+            // Calling another function:
+            return fetchIngredientsFailed(state, action);
 
         default:
             return {
