@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 
-import {connect} from "react-redux";
-import * as actionCreators from "../../../store/actions";
-
 import {Redirect} from 'react-router-dom';
+
+import * as actionCreators from "../../../store/actions";
+import {connect} from "react-redux";
 
 class Logout extends Component {
 
