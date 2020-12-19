@@ -212,7 +212,7 @@ class Auth extends Component {
         }
 
         let authRedirect = null;
-        // Redirects if the user is not authenticated:
+        // Redirects if the user is authenticated:
         if (this.props.isAuthenticated) {
             // authRedirect = <Redirect to={this.props.building ? '/checkout' : '/'}/>;
             authRedirect = <Redirect to={this.props.authRedirectPath}/>;
