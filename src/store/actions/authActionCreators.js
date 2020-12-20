@@ -12,7 +12,7 @@ export const authSuccess = (idToken, localId) => {
         type: actionTypes.AUTH_SUCCESS,
         payload: {
             idToken: idToken,
-            userID: localId
+            userId: localId
         }
     };
 };
