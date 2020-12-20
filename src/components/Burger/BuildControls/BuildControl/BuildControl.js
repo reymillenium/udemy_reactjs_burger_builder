@@ -9,11 +9,12 @@ const buildControl = (props) => (
         <button
             className={classes.Less}
             onClick={props.removed}
-            disabled={props.disabled}>Less
+            disabled={props.disabledLessButton}>Less
         </button>
         <button
             className={classes.More}
-            onClick={props.added}>More
+            onClick={props.added}
+            disabled={props.disabledMoreButton}>More
         </button>
         <div className={classes.Label}>x {parseFloat(props.ingredient_price).toFixed(2)} USD</div>
     </div>
@@ -22,7 +23,8 @@ const buildControl = (props) => (
 buildControl.propTypes = {
     label: PropTypes.string.isRequired,
     removed: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    disabledLessButton: PropTypes.bool.isRequired,
+    disabledMoreButton: PropTypes.bool.isRequired,
     added: PropTypes.func.isRequired,
     ingredient_price: PropTypes.number.isRequired
 }
