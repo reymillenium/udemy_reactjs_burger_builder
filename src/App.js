@@ -20,36 +20,38 @@ class App extends Component {
     }
 
     render() {
+        let routes = (
+            <Switch>
+                <Route path={"/auth"} component={Auth}/>
+                <Route path={"/"} component={BurgerBuilder}/>
+            </Switch>
+        );
+        if (this.props.isAuthenticated) {
+            routes = (
+                <Switch>
+                    <Route path={"/checkout"} component={Checkout}/>
+                    <Route path={"/orders"} component={Orders}/>
+                    {/*<Route path={"/auth"} component={Auth}/>*/}
+                    <Route path={"/logout"} component={Logout}/>
+                    <Route path={"/"} component={BurgerBuilder}/>
+                </Switch>
+            );
+        }
         return (
             <Auxiliary>
                 <Layout>
-                    {/* No more. Now we are using routes. */}
-                    {/*<BurgerBuilder/>*/}
-                    {/*<Checkout/>*/}
-
-                    {/* It works: */}
-                    {/* An exact match, doesn't matter the order */}
-                    {/*<Route path={"/checkout"} exact={true} component={Checkout}/>*/}
-                    {/*<Route path={"/"} exact={true} component={BurgerBuilder}/>*/}
-
-                    <Switch>
-                        {/* It works: Gets the first match only. It is an exact match also, so it doesn't matter the order  */}
-                        {/*<Route path={"/checkout"} exact={true} component={Checkout}/>*/}
-                        {/*<Route path={"/"} exact={true} component={BurgerBuilder}/>*/}
-
-                        {/* It works: */}
-                        {/* Gets the first match only. The order matters. So, the root must be the last one */}
-                        <Route path={"/checkout"} component={Checkout}/>
-                        <Route path={"/orders"} component={Orders}/>
-                        <Route path={"/auth"} component={Auth}/>
-                        <Route path={"/logout"} component={Logout}/>
-                        <Route path={"/"} component={BurgerBuilder}/>
-                    </Switch>
+                    {routes}
                 </Layout>
             </Auxiliary>
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.idToken !== null
+    }
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -61,4 +63,4 @@ const mapDispatchToProps = dispatch => {
 // export default connect(null, mapDispatchToProps)(App);
 // withRoute will enforce your props being passed down to the App component and therefore the react router
 // ...is back on the page and we'll know whats getting loaded
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
