@@ -97,11 +97,12 @@ export const authCheckState = () => {
             dispatch(logOut());
         } else { // The token exists, but lets check the expiration date...
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate > new Date()) { // All good yet
+            if (expirationDate >= new Date()) { // All good yet
                 const localId = localStorage.getItem('localId');
                 dispatch(authSuccess(token, localId));
 
-                const expiresIn = expirationDate.getSeconds() - new Date().getSeconds();
+                // const expiresIn = expirationDate.getSeconds() - new Date().getSeconds();
+                const expiresIn = Math.abs(expirationDate - new Date()) / 1000;
                 dispatch(checkAuthTimeOut(expiresIn));
             } else { // Our token has expired
                 dispatch(logOut());
