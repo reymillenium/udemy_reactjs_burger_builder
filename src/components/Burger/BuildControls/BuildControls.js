@@ -20,7 +20,8 @@ const buildControls = (props) => (
                 label={ctrl.label}
                 added={() => props.ingredientAdded(ctrl.type)}
                 removed={() => props.ingredientRemoved(ctrl.type)}
-                disabled={props.disabledInfo[ctrl.type]}
+                disabledLessButton={props.disabledLeftInfo[ctrl.type]}
+                disabledMoreButton={props.disabledRightInfo[ctrl.type]}
                 ingredient_price={props.ingredient_prices[ctrl.type]}
             />
         ))}
@@ -37,7 +38,8 @@ buildControls.propTypes = {
     price: PropTypes.number.isRequired,
     ingredientAdded: PropTypes.func.isRequired,
     ingredientRemoved: PropTypes.func.isRequired,
-    disabledInfo: PropTypes.object.isRequired,
+    disabledLeftInfo: PropTypes.object.isRequired,
+    disabledRightInfo: PropTypes.object.isRequired,
     ingredient_prices: PropTypes.object.isRequired,
     purchasable: PropTypes.bool.isRequired
 };
