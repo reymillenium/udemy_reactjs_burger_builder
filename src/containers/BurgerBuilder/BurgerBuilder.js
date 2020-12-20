@@ -201,7 +201,7 @@ class BurgerBuilder extends Component {
             ...this.props.ingredients
         }
         for (let key in disabledRightInfo) {
-            disabledRightInfo[key] = disabledRightInfo[key] >= 2
+            disabledRightInfo[key] = disabledRightInfo[key] >= 3
         }
 
 

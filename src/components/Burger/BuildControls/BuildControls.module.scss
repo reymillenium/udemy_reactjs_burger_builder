@@ -5,8 +5,10 @@
   flex-flow: column;
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
-  margin: auto;
+  margin: 20px auto auto;
   padding: 10px 0;
+  position: fixed;
+  bottom: 0;
 }
 
 .OrderButton {
