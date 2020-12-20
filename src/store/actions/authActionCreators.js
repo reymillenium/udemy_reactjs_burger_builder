@@ -101,7 +101,7 @@ export const authCheckState = () => {
                 const localId = localStorage.getItem('localId');
                 dispatch(authSuccess(token, localId));
 
-                // const expiresIn = expirationDate.getSeconds() - new Date().getSeconds();
+                // const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000;
                 const expiresIn = Math.abs(expirationDate - new Date()) / 1000;
                 dispatch(checkAuthTimeOut(expiresIn));
             } else { // Our token has expired
