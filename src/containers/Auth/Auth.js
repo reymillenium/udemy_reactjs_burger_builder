@@ -70,6 +70,10 @@ class Auth extends Component {
         if (!this.props.building && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath('/');
         }
+        // Works: What matters is building only:
+        // if (!this.props.building) {
+        //     this.props.onSetAuthRedirectPath('/');
+        // }
     }
 
     checkValidity(value, validationRules) {
