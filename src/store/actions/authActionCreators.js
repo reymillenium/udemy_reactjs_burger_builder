@@ -7,12 +7,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (authData) => {
+export const authSuccess = (idToken, localId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         payload: {
-            idToken: authData.idToken,
-            userID: authData.localId
+            idToken: idToken,
+            userID: localId
         }
     };
 };
@@ -36,6 +36,10 @@ export const checkAuthTimeOut = (expirationTime) => {
 };
 
 export const logOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('localId');
+
     return {
         type: actionTypes.AUTH_LOG_OUT
     }
@@ -59,7 +63,12 @@ export const auth = (email, password, isSignUp) => {
         axios.post(endPointURL, authData)
             .then(response => {
                 console.log('response.data = ', response.data);
-                dispatch(authSuccess(response.data));
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                localStorage.setItem('token', response.data.idToken);
+                localStorage.setItem('expirationDate', expirationDate);
+                localStorage.setItem('localId', response.data.localId);
+
+                dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeOut(response.data.expiresIn));
             })
             .catch(error => {
@@ -76,6 +85,27 @@ export const setAuthRedirectPath = (authRedirectPath) => {
         type: actionTypes.SET_AUTH_REDIRECT_PATH,
         payload: {
             authRedirectPath: authRedirectPath
+        }
+    }
+};
+
+// Pure utility action creator, that dispatches other actions depending of our current state:
+export const authCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem('token');
+        if (!token) { // There is no token
+            dispatch(logOut());
+        } else { // The token exists, but lets check the expiration date...
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            if (expirationDate > new Date()) { // All good yet
+                const localId = localStorage.getItem('localId');
+                dispatch(authSuccess(token, localId));
+
+                const expiresIn = expirationDate.getSeconds() - new Date().getSeconds();
+                dispatch(checkAuthTimeOut(expiresIn));
+            } else { // Our token has expired
+                dispatch(logOut());
+            }
         }
     }
 };
