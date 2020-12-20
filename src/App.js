@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import './App.css';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from "./store/actions/index";
 
@@ -58,4 +58,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 // export default App;
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+// withRoute will enforce your props being passed down to the App component and therefore the react router
+// ...is back on the page and we'll know whats getting loaded
+export default withRouter(connect(null, mapDispatchToProps)(App));
