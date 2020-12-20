@@ -190,12 +190,21 @@ class BurgerBuilder extends Component {
     }
 
     render() {
-        const disabledInfo = {
+        const disabledLeftInfo = {
             ...this.props.ingredients
         }
-        for (let key in disabledInfo) {
-            disabledInfo[key] = disabledInfo[key] <= 0
+        for (let key in disabledLeftInfo) {
+            disabledLeftInfo[key] = disabledLeftInfo[key] <= 0
         }
+
+        const disabledRightInfo = {
+            ...this.props.ingredients
+        }
+        for (let key in disabledRightInfo) {
+            disabledRightInfo[key] = disabledRightInfo[key] >= 2
+        }
+
+
         let orderSummary = null;
         let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>
 
@@ -206,7 +215,8 @@ class BurgerBuilder extends Component {
                     <BuildControls
                         ingredientAdded={this.props.onAddIngredient}
                         ingredientRemoved={this.props.onRemoveIngredient}
-                        disabledInfo={disabledInfo}
+                        disabledLeftInfo={disabledLeftInfo}
+                        disabledRightInfo={disabledRightInfo}
                         price={parseFloat(this.props.totalPrice)}
                         purchasable={this.isPurchasable(this.props.ingredients)}
                         ingredient_prices={INGREDIENT_PRICES}
