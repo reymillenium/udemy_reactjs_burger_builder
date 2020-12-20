@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 // import './App.css';
 import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actionCreators from "./store/actions/index";
+
 
 import Auxiliary from './hoc/Auxiliary/Auxiliary';
 import Layout from './hoc/Layout/Layout';
@@ -11,6 +14,10 @@ import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 
 class App extends Component {
+
+    componentDidMount() {
+        this.props.onAuthCheckState();
+    }
 
     render() {
         return (
@@ -44,4 +51,11 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuthCheckState: () => dispatch(actionCreators.authCheckState())
+    }
+};
+
+// export default App;
+export default connect(null, mapDispatchToProps)(App);
