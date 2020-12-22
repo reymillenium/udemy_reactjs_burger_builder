@@ -1,11 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
 
 import classes from './NavigationItem.module.scss';
-import PropTypes from 'prop-types';
 
 const navigationItem = (props) => (
-    <li className={classes.NavigationItem}>
+    <li className={classes.NavigationItem} onClick={props.clicked}>
         {/*<a*/}
         {/*    href={props.href}*/}
         {/*    className={props.active ? classes.active : null}*/}
@@ -21,7 +21,8 @@ const navigationItem = (props) => (
 
 navigationItem.propTypes = {
     href: PropTypes.string.isRequired,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    clicked: PropTypes.func
 }
 
 export default navigationItem;
