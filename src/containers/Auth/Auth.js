@@ -159,13 +159,22 @@ class Auth extends Component {
         // };
 
         // Also the same, but using the utility function:
-        const updateAuthElement = updateObject(this.state.controls[inputIdentifier], {
-            value: event.target.value,
-            valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
-            touched: true
-        });
+        // const updateAuthElement = updateObject(this.state.controls[inputIdentifier], {
+        //     value: event.target.value,
+        //     valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
+        //     touched: true
+        // });
+        // const updatedAuthForm = updateObject(this.state.controls, {
+        //     [inputIdentifier]: updateAuthElement
+        // });
+
+        // Also using the utility function, but more compact:
         const updatedAuthForm = updateObject(this.state.controls, {
-            [inputIdentifier]: updateAuthElement
+            [inputIdentifier]: updateObject(this.state.controls[inputIdentifier], {
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
+                touched: true
+            })
         });
 
         let formIsValid = true;
