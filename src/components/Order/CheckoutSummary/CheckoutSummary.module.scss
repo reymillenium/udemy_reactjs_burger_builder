@@ -6,6 +6,7 @@
 
 @media (min-width: 600px) {
   .CheckoutSummary {
-    width: 500px;
+    // Commenting this it is suppose to solve issue with centering of the Burger inside the CheckoutSummary
+    //width: 500px;
   }
 }
