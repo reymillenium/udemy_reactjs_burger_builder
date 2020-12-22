@@ -220,13 +220,22 @@ class ContactData extends Component {
         // updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         // Using the utility function:
-        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
-            value: event.target.value,
-            valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validationRules),
-            touched: true
-        });
+        // const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+        //     value: event.target.value,
+        //     valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validationRules),
+        //     touched: true
+        // });
+        // const updatedOrderForm = updateObject(this.state.orderForm, {
+        //     [inputIdentifier]: updatedFormElement
+        // });
+
+        // Also using the utility function, but more compact:
         const updatedOrderForm = updateObject(this.state.orderForm, {
-            [inputIdentifier]: updatedFormElement
+            [inputIdentifier]: updateObject(this.state.orderForm[inputIdentifier], {
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validationRules),
+                touched: true
+            })
         });
 
         let formIsValid = true;
