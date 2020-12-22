@@ -15,9 +15,9 @@ export const checkValidity = (value, validationRules) => {
         isValid = (value.length > validationRules.maxLength ? false : isValid);
     }
 
-    // if (validationRules && validationRules.lettersOnly) {
-    //     isValid = (!hasOnlyLetters(value) ? false : isValid);
-    // }
+    if (validationRules && validationRules.lettersOnly) {
+        isValid = (!hasOnlyLetters(value) ? false : isValid);
+    }
 
     if (validationRules && validationRules.namesOnly) {
         isValid = (!hasOnlyNames(value) ? false : isValid);

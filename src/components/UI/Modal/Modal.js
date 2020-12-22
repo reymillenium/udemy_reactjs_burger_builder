@@ -10,11 +10,11 @@ class Modal extends Component {
         return (nextProps.show !== this.props.show || nextProps.children !== this.props.children);
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-    }
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    // }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    // }
 
     render() {
         return (

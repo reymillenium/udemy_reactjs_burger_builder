@@ -4,11 +4,11 @@ import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 
 class OrderSummary extends Component {
-    componentWillUpdate(nextProps, nextState, nextContext) {
-    }
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    // }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    // }
 
     render() {
         const ingredientsSummaryList = Object.keys(this.props.ingredients).map(igKey => {

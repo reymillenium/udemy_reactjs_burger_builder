@@ -167,8 +167,8 @@ const burgerBuilderReducer = (state = initialState, action) => {
     // return state;
 }
 
-const updatePurchasableState = (currentIngredients) => {
-    return Object.values(currentIngredients).some(el => el > 0);
-}
+// const updatePurchasableState = (currentIngredients) => {
+//     return Object.values(currentIngredients).some(el => el > 0);
+// }
 
 export default burgerBuilderReducer;
