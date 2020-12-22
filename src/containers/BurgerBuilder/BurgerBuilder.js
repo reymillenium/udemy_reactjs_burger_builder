@@ -38,7 +38,6 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
-        // console.log(this.props);
         // axios.get('https://udemy-reactjs-burger-bui-82d48.firebaseio.com/ingredients.json')
         //     .then(response => {
         //         this.setState({
@@ -153,13 +152,11 @@ class BurgerBuilder extends Component {
         //
         // axios.post('/orders.json', order)
         //     .then(response => {
-        //         // console.log(response);
         //         this.setState({
         //             loading: false,
         //             purchasing: false
         //         });
         //     }).catch(error => {
-        //     // console.log(error);
         //     this.setState({
         //         loading: false,
         //         purchasing: false
@@ -174,10 +171,8 @@ class BurgerBuilder extends Component {
         //     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         // }
         // queryParams.push('price=' + this.props.totalPrice);
-        // // console.log(queryParams);
         //
         // const queryString = queryParams.join('&');
-        // // console.log(queryString);
         //
         // this.props.history.push({
         //     pathname: '/checkout',

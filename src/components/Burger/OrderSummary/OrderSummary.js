@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 
 class OrderSummary extends Component {
     componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('[OrderSummary] -> componentWillUpdate');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('[OrderSummary] -> componentDidUpdate');
     }
 
     render() {
