@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 
 // Declared the store, after adding thunk (with applyMiddleware & compose):
 // Another way to use the DevTools extension. If not found uses the native redux solutions that doesn't gives us DevTools support then:
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 // const store = createStore(burgerBuilderReducer, composeEnhancers(applyMiddleware(thunk)));
 // Combining both reducers:
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
