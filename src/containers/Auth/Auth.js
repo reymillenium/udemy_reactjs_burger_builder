@@ -156,7 +156,7 @@ class Auth extends Component {
         //         valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
         //         touched: true
         //     }
-        // };q
+        // };
 
         // Also the same, but using the utility function:
         const updateAuthElement = updateObject(this.state.controls[inputIdentifier], {
