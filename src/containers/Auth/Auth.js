@@ -5,6 +5,7 @@ import Input from '../../components/UI/Input/Input';
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import {updateObject} from "../../shared/utility";
 import classes from "./Auth.module.scss";
 import axios from '../../axios-orders';
 
@@ -147,15 +148,25 @@ class Auth extends Component {
         // updatedAuthForm[inputIdentifier] = updatedFormElement;
 
         // Exactly the same:
-        const updatedAuthForm = {
-            ...this.state.controls,
-            [inputIdentifier]: {
-                ...this.state.controls[inputIdentifier],
-                value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
-                touched: true
-            }
-        };
+        // const updatedAuthForm = {
+        //     ...this.state.controls,
+        //     [inputIdentifier]: {
+        //         ...this.state.controls[inputIdentifier],
+        //         value: event.target.value,
+        //         valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
+        //         touched: true
+        //     }
+        // };q
+
+        // Also the same, but using the utility function:
+        const updateAuthElement = updateObject(this.state.controls[inputIdentifier], {
+            value: event.target.value,
+            valid: this.checkValidity(event.target.value, this.state.controls[inputIdentifier].validationRules),
+            touched: true
+        });
+        const updatedAuthForm = updateObject(this.state.controls, {
+            [inputIdentifier]: updateAuthElement
+        });
 
         let formIsValid = true;
         for (let inputIdentifier in updatedAuthForm) {
