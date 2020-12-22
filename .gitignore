@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Env variables
 .env
+
+# JetBrains IDE:
+.idea/
