@@ -17,18 +17,17 @@ configure({adapter: new Adapter()});
 describe('<NavigationItems />', () => {
     // Rendering the necessary <NavigationItems /> components
     let wrapper;
-    let wrapperAuthenticated;
+    // let wrapperAuthenticated;
 
     beforeEach(() => {
         // An unauthenticated user:
         wrapper = shallow(<NavigationItems/>);
         // An authenticated user:
-        wrapperAuthenticated = shallow(<NavigationItems isAuthenticated/>);
+        // wrapperAuthenticated = shallow(<NavigationItems isAuthenticated/>);
     });
 
     it('should render one <ul /> element always', () => {
         expect(wrapper.find('ul')).toHaveLength(1);
-        expect(wrapperAuthenticated.find('ul')).toHaveLength(1);
     });
 
     it('should render two <NavigationItem /> components if the user is not authenticated', () => {
@@ -36,6 +35,7 @@ describe('<NavigationItems />', () => {
     });
 
     it('should render three <NavigationItem /> components if the user is authenticated', () => {
-        expect(wrapperAuthenticated.find(NavigationItem)).toHaveLength(3);
+        wrapper.setProps({isAuthenticated: true});
+        expect(wrapper.find(NavigationItem)).toHaveLength(3);
     });
 });
