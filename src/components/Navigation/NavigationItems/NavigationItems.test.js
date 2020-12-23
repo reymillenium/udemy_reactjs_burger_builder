@@ -14,12 +14,15 @@ import NavigationItem from './NavigationItem/NavigationItem';
 // Connecting Enzyme to React v16.x
 configure({adapter: new Adapter()});
 
-// Rendering a <NavigationItems /> component
-
-
 describe('<NavigationItems />', () => {
-    it('should render two <NavigationItem /> elements if no authenticated', () => {
-        const wrapper = shallow(<NavigationItems/>);
+    // Rendering a <NavigationItems /> component
+    const wrapper = shallow(<NavigationItems/>);
+
+    it('should render one <ul /> element', () => {
+        expect(wrapper.find('ul')).toHaveLength(1);
+    });
+
+    it('should render two <NavigationItem /> components if no authenticated', () => {
         expect(wrapper.find(NavigationItem)).toHaveLength(2);
     });
 });
