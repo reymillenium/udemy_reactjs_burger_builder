@@ -39,13 +39,39 @@ describe('<NavigationItems />', () => {
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
     });
 
-    it('should render a Logout <NavigationItem /> if the user is authenticated', () => {
+    it('should render a Burger Builder <NavigationItem /> if the user is not authenticated', () => {
+        expect(wrapper.contains(<NavigationItem href={"/"} exact={true}>Burger Builder</NavigationItem>)).toEqual(true);
+    });
+
+    it('should render a Burger Builder <NavigationItem /> if the user is authenticated', () => {
         wrapper.setProps({isAuthenticated: true});
-        expect(wrapper.contains(<NavigationItem href={"/logout"}>Logout</NavigationItem>)).toEqual(true);
+        expect(wrapper.contains(<NavigationItem href={"/"} exact={true}>Burger Builder</NavigationItem>)).toEqual(true);
+    });
+
+    it('should not render a Orders <NavigationItem /> if the user is not authenticated', () => {
+        expect(wrapper.contains(<NavigationItem href={"/orders"}>Orders</NavigationItem>)).toEqual(false);
     });
 
     it('should render a Orders <NavigationItem /> if the user is authenticated', () => {
         wrapper.setProps({isAuthenticated: true});
         expect(wrapper.contains(<NavigationItem href={"/orders"}>Orders</NavigationItem>)).toEqual(true);
+    });
+
+    it('should not render a Logout <NavigationItem /> if the user is not authenticated', () => {
+        expect(wrapper.contains(<NavigationItem href={"/logout"}>Logout</NavigationItem>)).toEqual(false);
+    });
+
+    it('should render a Logout <NavigationItem /> if the user is authenticated', () => {
+        wrapper.setProps({isAuthenticated: true});
+        expect(wrapper.contains(<NavigationItem href={"/logout"}>Logout</NavigationItem>)).toEqual(true);
+    });
+
+    it('should not render a Authenticate <NavigationItem /> if the user is authenticated', () => {
+        wrapper.setProps({isAuthenticated: true});
+        expect(wrapper.contains(<NavigationItem href={"/auth"}>Authenticate</NavigationItem>)).toEqual(false);
+    });
+
+    it('should render a Authenticate <NavigationItem /> if the user is not authenticated', () => {
+        expect(wrapper.contains(<NavigationItem href={"/auth"}>Authenticate</NavigationItem>)).toEqual(true);
     });
 });
