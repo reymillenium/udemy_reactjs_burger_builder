@@ -1,6 +1,6 @@
 import React from "react";
 
-// Enzyme allows to render juts one component stand-alone, independent of the entire react app.
+// Enzyme allows to render just one component stand-alone, independent of the entire react app.
 // Enzyme allows to create an instance of a single component, so we can run isolated tests later
 // Shallow is the most popular helper method or the best way of rendering react components in many circumstances
 // Shallow renders the component with all its content, but the content isn't deeply rendered
@@ -37,5 +37,10 @@ describe('<NavigationItems />', () => {
     it('should render three <NavigationItem /> components if the user is authenticated', () => {
         wrapper.setProps({isAuthenticated: true});
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
+    });
+
+    it('should render three <NavigationItem /> components if the user is authenticated', () => {
+        wrapper.setProps({isAuthenticated: true});
+        expect(wrapper.contains(<NavigationItem href={"/logout"}>Logout</NavigationItem>)).toEqual(true);
     });
 });
