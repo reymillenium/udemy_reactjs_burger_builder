@@ -18,12 +18,13 @@ describe('<BurgerBuilder/>', () => {
         }}/>);
     });
 
-    it('should render a <BuildControls /> container if the ingredients are present', () => {
+    it('should render one <BuildControls /> container if the ingredients are present', () => {
         wrapper.setProps({ingredients: {salad: 0}});
-        // expect(wrapper.contains(<NavigationItem href={"/logout"}>Logout</NavigationItem>)).toEqual(true);
-        // expect(wrapper.contains(<BuildControls></BuildControls>)).toEqual(true);
         expect(wrapper.find(BuildControls)).toHaveLength(1);
+    });
 
+    it('should not render a <BuildControls /> container if the ingredients are not present', () => {
+        expect(wrapper.find(BuildControls)).toHaveLength(0);
     });
 
 
