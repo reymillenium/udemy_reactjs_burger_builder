@@ -20,7 +20,7 @@ const INGREDIENT_PRICES = {
     bacon: 0.70
 };
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     // The usual way:
     // constructor() {
     //     super();

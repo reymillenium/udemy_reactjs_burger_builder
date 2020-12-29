@@ -36,8 +36,10 @@ const buildControls = (props) => (
 
 buildControls.propTypes = {
     price: PropTypes.number.isRequired,
-    ingredientAdded: PropTypes.func.isRequired,
-    ingredientRemoved: PropTypes.func.isRequired,
+    // ingredientAdded: PropTypes.func.isRequired,
+    ingredientAdded: PropTypes.func,
+    // ingredientRemoved: PropTypes.func.isRequired,
+    ingredientRemoved: PropTypes.func,
     disabledLeftInfo: PropTypes.object.isRequired,
     disabledRightInfo: PropTypes.object.isRequired,
     ingredient_prices: PropTypes.object.isRequired,
