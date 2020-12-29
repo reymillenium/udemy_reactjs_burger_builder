@@ -80,4 +80,20 @@ describe('authReducer', () => {
         })).toEqual(afterAuthLogOutState);
     });
 
+    it('should store the new redirect path', () => {
+        const afterSetAuthRedirectPathState = {
+            idToken: null,
+            userId: null,
+            error: null,
+            loading: null,
+            authRedirectPath: 'some-redirect-path'
+        };
+
+        expect(authReducer(initialState, {
+            type: actionTypes.SET_AUTH_REDIRECT_PATH,
+            payload: {
+                authRedirectPath: 'some-redirect-path'
+            }
+        })).toEqual(afterSetAuthRedirectPathState);
+    });
 });
