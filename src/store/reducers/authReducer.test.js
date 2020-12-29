@@ -9,6 +9,7 @@ describe('authReducer', () => {
         loading: null,
         authRedirectPath: '/'
     };
+
     it('should return the initial state when the state is just getting setup at the beginning of our app', () => {
         expect(authReducer(undefined, {})).toEqual(initialState);
     });
@@ -34,7 +35,7 @@ describe('authReducer', () => {
             error: null,
             loading: false,
             authRedirectPath: '/'
-        }
+        };
 
         expect(authReducer(initialState, {
             type: actionTypes.AUTH_SUCCESS,
@@ -43,6 +44,25 @@ describe('authReducer', () => {
                 userId: 'some-user-id'
             }
         })).toEqual(afterAuthSuccessState);
+    });
+
+    it('should store the error when the auth fails', () => {
+        const afterAuthFailState = {
+            idToken: null,
+            userId: null,
+            error: 'some-error',
+            loading: false,
+            authRedirectPath: '/'
+        };
+
+
+        expect(authReducer(initialState, {
+            type: actionTypes.AUTH_FAIL,
+            payload: {
+                error: 'some-error'
+            }
+        })).toEqual(afterAuthFailState);
+
     });
 
 });
