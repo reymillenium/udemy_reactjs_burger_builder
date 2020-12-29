@@ -13,6 +13,20 @@ describe('authReducer', () => {
         expect(authReducer(undefined, {})).toEqual(initialState);
     });
 
+    it('should initiate the auth when trying to login', () => {
+        const afterAuthStartState = {
+            idToken: null,
+            userId: null,
+            error: null,
+            loading: true,
+            authRedirectPath: '/'
+        };
+
+        expect(authReducer(initialState, {
+            type: actionTypes.AUTH_START
+        })).toEqual(afterAuthStartState);
+    });
+
     it('Should store the token upon login', () => {
         const afterAuthSuccessState = {
             idToken: 'some-token',
