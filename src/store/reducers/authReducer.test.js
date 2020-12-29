@@ -1,5 +1,6 @@
 import authReducer from "./authReducer";
 import * as actionTypes from '../actions/actionTypes';
+import {AUTH_LOG_OUT} from "../actions/actionTypes";
 
 describe('authReducer', () => {
     const initialState = {
@@ -63,6 +64,20 @@ describe('authReducer', () => {
             }
         })).toEqual(afterAuthFailState);
 
+    });
+
+    it('should destroy the token upon logout', () => {
+        const afterAuthLogOutState = {
+            idToken: null,
+            userId: null,
+            error: null,
+            loading: null,
+            authRedirectPath: '/'
+        };
+
+        expect(authReducer(initialState, {
+            type: actionTypes.AUTH_LOG_OUT
+        })).toEqual(afterAuthLogOutState);
     });
 
 });
