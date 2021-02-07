@@ -1,3 +1,5 @@
+![ReyMillenium Banner](https://github.com/reymillenium/images/blob/master/reymillenium_banner_800x200.png)
+
 # BurgerBuilder
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
