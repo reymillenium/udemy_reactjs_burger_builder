@@ -43,8 +43,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Deployment
 
-The present project has being deployed to ![Heroku](https://udemy-reactjs-burger-builder.herokuapp.com/) and to ![Firebase](https://udemy-reactjs-burger-bui-82d48.firebaseapp.com/).
+The present project has being deployed to [Heroku](https://udemy-reactjs-burger-builder.herokuapp.com/) and to [Firebase](https://udemy-reactjs-burger-bui-82d48.firebaseapp.com/).
 
 ***
 ## Contact
-Created by ![Reinier Garcia](https://reiniergarcia.dev/) - feel free to contact me!
+Created by [Reinier Garcia](https://reiniergarcia.dev/) - feel free to contact me!
